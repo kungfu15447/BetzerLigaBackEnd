@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29209.62
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClassLibrary1", "ClassLibrary1\ClassLibrary1.csproj", "{0B325AEE-5E1E-4BA5-B6CD-B64DBAD25BF5}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{FC4CD23C-0CDD-42C1-85E9-4836BE4D0A69}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{9919176F-73F8-46FD-B38D-5F4EB31E207E}"
@@ -15,16 +13,16 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BetzerLiga.Core", "ClassLib
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BetzerLiga.Core.Entity", "BetzerLiga.Core.Entity\BetzerLiga.Core.Entity.csproj", "{CE63AA4A-1841-481E-843D-AC662D2FFD2C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BetzerLiga.Infrastructure.SQL", "BetzerLiga.Infrastructure.SQL\BetzerLiga.Infrastructure.SQL.csproj", "{4D0D5BF8-2D3E-4239-9AC3-405886E92399}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BetzerLiga.RestAPI", "BetzerLiga.RestAPI\BetzerLiga.RestAPI.csproj", "{1AB641E7-4331-4AF0-ABC2-1BD8E543E04F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{0B325AEE-5E1E-4BA5-B6CD-B64DBAD25BF5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0B325AEE-5E1E-4BA5-B6CD-B64DBAD25BF5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0B325AEE-5E1E-4BA5-B6CD-B64DBAD25BF5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0B325AEE-5E1E-4BA5-B6CD-B64DBAD25BF5}.Release|Any CPU.Build.0 = Release|Any CPU
 		{80CC7088-82C3-4957-AECF-58E590B2BB98}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{80CC7088-82C3-4957-AECF-58E590B2BB98}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{80CC7088-82C3-4957-AECF-58E590B2BB98}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -33,6 +31,14 @@ Global
 		{CE63AA4A-1841-481E-843D-AC662D2FFD2C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CE63AA4A-1841-481E-843D-AC662D2FFD2C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CE63AA4A-1841-481E-843D-AC662D2FFD2C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4D0D5BF8-2D3E-4239-9AC3-405886E92399}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4D0D5BF8-2D3E-4239-9AC3-405886E92399}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4D0D5BF8-2D3E-4239-9AC3-405886E92399}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4D0D5BF8-2D3E-4239-9AC3-405886E92399}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1AB641E7-4331-4AF0-ABC2-1BD8E543E04F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1AB641E7-4331-4AF0-ABC2-1BD8E543E04F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1AB641E7-4331-4AF0-ABC2-1BD8E543E04F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1AB641E7-4331-4AF0-ABC2-1BD8E543E04F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -40,6 +46,8 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{80CC7088-82C3-4957-AECF-58E590B2BB98} = {FC4CD23C-0CDD-42C1-85E9-4836BE4D0A69}
 		{CE63AA4A-1841-481E-843D-AC662D2FFD2C} = {FC4CD23C-0CDD-42C1-85E9-4836BE4D0A69}
+		{4D0D5BF8-2D3E-4239-9AC3-405886E92399} = {9919176F-73F8-46FD-B38D-5F4EB31E207E}
+		{1AB641E7-4331-4AF0-ABC2-1BD8E543E04F} = {54A3AD73-039A-4AE7-8D48-A8B6D77643DA}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {9A211015-D2E7-4614-89B3-4454DC0E1104}
