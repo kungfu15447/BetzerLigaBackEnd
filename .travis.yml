@@ -1,9 +1,9 @@
 language: csharp
 mono: none
 dotnet: 2.2
-solution: BetzerLiga\BetzerLiga.sln
+solution: BetzerLiga/BetzerLiga.sln
 
 script:
- - dotnet restore BetzerLiga\BetzerLiga.sln
- - dotnet build BetzerLiga\BetzerLiga.sln
- - dotnet test BetzerLiga\ServiceTest\ServiceTest.csproj
+ - dotnet restore BetzerLiga/BetzerLiga.sln
+ - dotnet build BetzerLiga/BetzerLiga.sln
+ - dotnet test BetzerLiga/ServiceTest/ServiceTest.csproj
