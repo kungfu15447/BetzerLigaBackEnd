@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace BetzerLiga.Core.ApplicationService.Implementation
+namespace BetzerLiga.Infrastructure.SQL.Repositories
 {
-    class Class1
+    class UserRepository
     {
     }
 }

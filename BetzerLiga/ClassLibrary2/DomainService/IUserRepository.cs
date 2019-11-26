@@ -4,7 +4,8 @@ using System.Text;
 
 namespace BetzerLiga.Core.DomainService
 {
-    class Class1
+    public interface IUserRepository
     {
+
     }
 }
