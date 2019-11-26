@@ -16,8 +16,5 @@ namespace BetzerLiga.Core.ApplicationService
         User Update(User UserToUpdate);
 
         User Delete(int id);
-
-        User NewUser(string firstName, string lastName, bool isAdmin, string email,
-            byte[] passwordHash, byte[] passwordSalt, List<UserTour> tournaments, List<UserMatch> tips, List<User> following);
     }
 }
