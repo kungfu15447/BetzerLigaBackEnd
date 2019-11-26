@@ -35,10 +35,10 @@ namespace BetzerLiga.Infrastructure.SQL.Repositories
             return _context.Tournaments;
         }
 
-        public Tournament ReadTourById(int id)
+        public Tournament ReadTourById(int Id)
         {
             return _context.Tournaments
-                .FirstOrDefault(t => t.Id == id);
+                .FirstOrDefault(t => t.Id == Id);
         }
 
         public Tournament UpdateTour(Tournament Tour)
