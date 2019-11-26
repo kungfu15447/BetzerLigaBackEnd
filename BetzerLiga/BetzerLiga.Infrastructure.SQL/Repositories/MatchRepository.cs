@@ -3,6 +3,7 @@ using BetzerLiga.Core.Entity;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace BetzerLiga.Infrastructure.SQL.Repositories
@@ -35,12 +36,14 @@ namespace BetzerLiga.Infrastructure.SQL.Repositories
 
         public Match ReadMatchById(int Id)
         {
-            throw new NotImplementedException();
+            return _context.Matches
+                .FirstOrDefault(m => m.Id == Id);
         }
 
         public Match UpdateMatch(Match Match)
         {
-            throw new NotImplementedException();
+            _context.Attach(Match).State = EntityState.Modified;
+            return Match;
         }
     }
 }
