@@ -7,7 +7,11 @@
 
   <ItemGroup>
     <Folder Include="DomainService\" />
-    <Folder Include="ApplicationService\" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <ProjectReference Include="..\BetzerLiga.Core.Entity\BetzerLiga.Core.Entity.csproj" />
   </ItemGroup>
 
 
