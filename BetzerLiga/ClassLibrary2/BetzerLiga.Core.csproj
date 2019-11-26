@@ -4,5 +4,9 @@
     <TargetFramework>netcoreapp2.2</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\BetzerLiga.Core.Entity\BetzerLiga.Core.Entity.csproj" />
+  </ItemGroup>
+
 
 </Project>
