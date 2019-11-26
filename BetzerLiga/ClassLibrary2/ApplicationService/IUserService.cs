@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace BetzerLiga.Core.DomainService
+namespace BetzerLiga.Core.ApplicationService
 {
-    class Class1
+    public interface IUserService
     {
+
     }
 }
