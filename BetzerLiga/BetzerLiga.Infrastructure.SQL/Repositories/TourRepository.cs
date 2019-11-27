@@ -32,12 +32,18 @@ namespace BetzerLiga.Infrastructure.SQL.Repositories
 
         public IEnumerable<Tournament> ReadAll()
         {
-            return _context.Tournaments;
+            return _context.Tournaments
+                .Include(r => r.Rounds)
+                .Include(t => t.Participants)
+                .ThenInclude(p => p.User);
         }
 
         public Tournament ReadTourById(int Id)
         {
             return _context.Tournaments
+                .Include(r => r.Rounds)
+                .Include(t => t.Participants)
+                .ThenInclude(p => p.User)
                 .FirstOrDefault(t => t.Id == Id);
         }
 

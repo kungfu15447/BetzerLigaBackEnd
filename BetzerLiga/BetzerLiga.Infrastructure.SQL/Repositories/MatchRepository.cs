@@ -31,12 +31,18 @@ namespace BetzerLiga.Infrastructure.SQL.Repositories
 
         public IEnumerable<Match> ReadAll()
         {
-            return _context.Matches;
+            return _context.Matches
+                .Include(m => m.Round)
+                .Include(m => m.Tips)
+                .ThenInclude(t => t.User);
         }
 
         public Match ReadMatchById(int Id)
         {
             return _context.Matches
+                .Include(m => m.Round)
+                .Include(m => m.Tips)
+                .ThenInclude(t => t.User)
                 .FirstOrDefault(m => m.Id == Id);
         }
 
