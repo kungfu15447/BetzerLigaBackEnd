@@ -8,7 +8,7 @@ using System.Text;
 
 namespace BetzerLiga.Infrastructure.SQL.Repositories
 {
-    class UserRepository : IUserRepository
+    public class UserRepository : IUserRepository
     {
         private BetzerLigaContext _context;
 
