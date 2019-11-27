@@ -15,6 +15,34 @@ namespace BetzerLiga.Infrastructure.SQL
 
         protected override void OnModelCreating(ModelBuilder ModelBuilder)
         {
+            ModelBuilder.Entity<Tournament>()
+                .HasMany(t => t.Participants)
+                .WithOne(p => p.Tournament)
+                .HasForeignKey(p => p.TournamentId);
+
+            ModelBuilder.Entity<User>()
+                .HasMany(u => u.Tournaments)
+                .WithOne(t => t.User)
+                .HasForeignKey(t => t.UserId);
+
+            ModelBuilder.Entity<User>()
+                .HasMany(u => u.Tips)
+                .WithOne(t => t.User)
+                .HasForeignKey(t => t.UserId);
+
+            ModelBuilder.Entity<Match>()
+                .HasMany(m => m.Tips)
+                .WithOne(t => t.Match)
+                .HasForeignKey(t => t.MatchId);
+
+            ModelBuilder.Entity<Match>()
+                .HasOne(m => m.Round);
+
+            ModelBuilder.Entity<Round>()
+                .HasMany(r => r.Matches)
+                .WithOne(m => m.Round);
+
+            
 
         }
 
