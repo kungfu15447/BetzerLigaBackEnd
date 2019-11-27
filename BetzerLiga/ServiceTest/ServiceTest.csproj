@@ -22,6 +22,9 @@
   <ItemGroup>
 
     <ProjectReference Include="..\BetzerLiga.Core.Entity\BetzerLiga.Core.Entity.csproj" />
+
+    <ProjectReference Include="..\BetzerLiga.Infrastructure.SQL\BetzerLiga.Infrastructure.SQL.csproj" />
+
     <ProjectReference Include="..\ClassLibrary2\BetzerLiga.Core.csproj" />
   </ItemGroup>
 
