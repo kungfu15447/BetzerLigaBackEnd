@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BetzerLiga.RestAPI.Initializer
 {
-    public class DBInitializer
+    public class DBInitializer : IDBInitializer
     {
         private IAuthenticationHelper authenticationHelper;
         public DBInitializer(IAuthenticationHelper authHelper)
