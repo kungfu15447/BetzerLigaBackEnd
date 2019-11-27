@@ -40,7 +40,7 @@ namespace BetzerLiga.Infrastructure.SQL.Repositories
             }
             var token = new JwtSecurityToken(
                 new JwtHeader(
-                new Microsoft.IdentityModel.Tokens.SigningCredentials(
+                new SigningCredentials(
                     new SymmetricSecurityKey(secretBytes),
                     SecurityAlgorithms.HmacSha256)),
                 new JwtPayload(null,
