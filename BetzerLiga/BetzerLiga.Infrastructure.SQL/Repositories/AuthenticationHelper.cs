@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using BetzerLiga.Core.DomainService;
 using BetzerLiga.Core.Entity;
 
-namespace BetzerLiga.Core.ApplicationService.Authentication
+namespace BetzerLiga.Infrastructure.SQL.Repositories
 {
     public class AuthenticationHelper : IAuthenticationHelper
     {
