@@ -19,6 +19,7 @@ namespace BetzerLiga.RestAPI.Controllers
         {
             _tourService = tourService;
         }
+
         [HttpGet]
         public ActionResult<List<Tournament>> Get()
         {
@@ -42,7 +43,15 @@ namespace BetzerLiga.RestAPI.Controllers
         [HttpPut("{id}")]
         public ActionResult<Tournament> Put(int id, [FromBody] Tournament tournament)
         {
-            return Ok(_tourService.UpdateTournament(tournament));
+            if (id == tournament.Id)
+            {
+                return Ok(_tourService.UpdateTournament(tournament));
+            }
+            else
+            {
+                return BadRequest("Id in header does not match Tournaments id");
+            }
+            
         }
 
         // DELETE api/pet/5
@@ -50,7 +59,14 @@ namespace BetzerLiga.RestAPI.Controllers
         public ActionResult<Tournament> Delete(int id)
         {
             Tournament tournament = _tourService.GetTourById(id);
-            return Ok(_tourService.DeleteTournament(tournament));
+            if (tournament != null)
+            {
+                return Ok(_tourService.DeleteTournament(tournament));
+            }else
+            {
+                return NotFound("Could not find tournament to delete");
+            }
+            
         }
     }
 }
