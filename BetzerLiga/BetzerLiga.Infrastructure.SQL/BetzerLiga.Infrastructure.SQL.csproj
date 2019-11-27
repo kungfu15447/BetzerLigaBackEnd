@@ -13,6 +13,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\BetzerLiga.Core.Entity\BetzerLiga.Core.Entity.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\ClassLibrary2\BetzerLiga.Core.csproj" />
   </ItemGroup>
 
