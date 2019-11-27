@@ -8,7 +8,7 @@ using System.Text;
 
 namespace BetzerLiga.Infrastructure.SQL.Repositories
 {
-    class MatchRepository : IMatchRepository
+    public class MatchRepository : IMatchRepository
     {
         private BetzerLigaContext _context;
 
