@@ -10,7 +10,7 @@ namespace BetzerLiga.Core.DomainService
     {
         Round Create(Round round);
         Round ReadById(int id);
-        List<Round> ReadAll(Round round);
+        List<Round> ReadAll();
         Round Update(Round roundUpdated);
         Round Delete(int id);
     }

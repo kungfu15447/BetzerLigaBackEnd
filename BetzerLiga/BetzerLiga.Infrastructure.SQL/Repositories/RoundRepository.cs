@@ -33,7 +33,7 @@ namespace BetzerLiga.Infrastructure.SQL.Repositories
                 .FirstOrDefault(r => r.Id == id);
         }
 
-        public List<Round> ReadAll(Round round)
+        public List<Round> ReadAll()
         {
             return _ctx.Rounds
                 .Include(r => r.Matches)
