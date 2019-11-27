@@ -11,7 +11,7 @@ namespace BetzerLiga.Core.ApplicationService
 
         User GetUserById(int id);
 
-        void Add(User user);
+        User Add(User user);
 
         User Update(User UserToUpdate);
 
