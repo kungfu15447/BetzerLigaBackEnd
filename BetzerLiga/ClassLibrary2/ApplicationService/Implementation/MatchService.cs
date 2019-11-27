@@ -4,7 +4,7 @@ using System.Text;
 
 namespace BetzerLiga.Core.ApplicationService.Implementation
 {
-    class MatchService
+    public class MatchService
     {
     }
 }
