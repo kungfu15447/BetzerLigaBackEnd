@@ -18,7 +18,7 @@ namespace BetzerLiga.RestAPI.Controllers
 
         // GET api/users
         [HttpGet]
-        public ActionResult<IEnumerable<string>> Get()
+        public ActionResult<IEnumerable<User>> Get()
         {
             try
             {
