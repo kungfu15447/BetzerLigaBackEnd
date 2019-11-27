@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BetzerLiga.RestAPI.Initializer
 {
-    interface IDBInitializer
+    public interface IDBInitializer
     {
         void Seed(BetzerLigaContext ctx);
     }

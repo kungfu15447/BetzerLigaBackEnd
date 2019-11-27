@@ -8,6 +8,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BetzerLiga.RestAPI.Controllers
 {
+    [Route("api/[controller]")]
+    [ApiController]
     public class UsersController : Controller
     {
         private readonly IUserService _userServ;
@@ -31,22 +33,22 @@ namespace BetzerLiga.RestAPI.Controllers
             }
         }
 
-        // GET api/values/5
+        // GET api/users/5
         [HttpGet("{id}")]
         public ActionResult<User> Get(int id)
         {
             if (id < 1) return BadRequest("Id must be greater than 1");
-            return _userServ.GetUserById(id);
+            return Ok(_userServ.GetUserById(id));
         }
 
-        // POST api/values
+        // POST api/users
         [HttpPost]
         public ActionResult<User> Post([FromBody] User user)
         {
-            return _userServ.Add(user);
+            return Ok(_userServ.Add(user));
         }
 
-        // PUT api/values/5
+        // PUT api/users/5
         [HttpPut("{id}")]
         public ActionResult<User> Put(int id, [FromBody] User user)
         {
@@ -58,7 +60,7 @@ namespace BetzerLiga.RestAPI.Controllers
             return Ok();
         }
 
-        // DELETE api/values/5
+        // DELETE api/users/5
         [HttpDelete("{id}")]
         public ActionResult<User> Delete(int id)
         {

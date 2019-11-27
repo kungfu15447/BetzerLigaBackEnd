@@ -32,6 +32,9 @@ namespace BetzerLiga.RestAPI.Initializer
                 PasswordSalt = passwordSaltUser,
                 IsAdmin = false
             };
+            user1 = ctx.Users.Add(user1).Entity;
+
+            ctx.SaveChanges();
 
         }
     }
