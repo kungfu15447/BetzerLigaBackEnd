@@ -67,10 +67,23 @@ namespace BetzerLiga.RestAPI
         {
             if (env.IsDevelopment())
             {
+                using (var scope = app.ApplicationServices.CreateScope())
+                {
+                    var context = scope.ServiceProvider
+                        .GetRequiredService<BetzerLigaContext>();
+                    context.Database.EnsureDeleted();
+                    context.Database.EnsureCreated();
+                }
                 app.UseDeveloperExceptionPage();
             }
             else
             {
+                using (var scope = app.ApplicationServices.CreateScope())
+                {
+                    var context = scope.ServiceProvider
+                        .GetRequiredService<BetzerLigaContext>();
+                    context.Database.EnsureCreated();
+                }
                 app.UseHsts();
             }
 
