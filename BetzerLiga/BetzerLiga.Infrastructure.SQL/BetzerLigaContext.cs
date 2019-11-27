@@ -15,7 +15,10 @@ namespace BetzerLiga.Infrastructure.SQL
 
         protected override void OnModelCreating(ModelBuilder ModelBuilder)
         {
-
+            ModelBuilder.Entity<Round>()
+                .HasMany<Match>(r => r.Matches)
+                .WithOne(m => m.Round)
+                .HasForeignKey(m => m.Id);
         }
 
         public DbSet<Tournament> Tournaments { get; set; }

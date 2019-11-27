@@ -9,7 +9,7 @@ namespace BetzerLiga.Core.DomainService
     public interface IRoundRepository
     {
         Round Create(Round round);
-        Round ReadById(Round round);
+        Round ReadById(int id);
         List<Round> ReadAll(Round round);
         Round Update(Round roundUpdated);
         Round Delete(int id);
