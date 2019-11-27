@@ -50,6 +50,7 @@ namespace BetzerLiga.Infrastructure.SQL.Repositories
         public Tournament UpdateTour(Tournament Tour)
         {
             _context.Attach(Tour).State = EntityState.Modified;
+            _context.SaveChanges();
             return Tour;
         }
     }
