@@ -38,8 +38,7 @@ namespace BetzerLiga.Infrastructure.SQL.Repositories
         public IEnumerable<User> GetAll()
         {
             return _context.Users
-                .OrderBy(u => u.Id)
-                .Include(u => u.Firstname);
+                .OrderBy(u => u.Id);
         }
 
         public User GetUserById(int id)
