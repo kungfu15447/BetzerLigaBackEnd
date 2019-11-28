@@ -37,7 +37,7 @@ namespace BetzerLiga.Infrastructure.SQL.Repositories
 
             if(user.IsAdmin)
             {
-                claims.Add(new Claim(ClaimTypes.Role, "administrator"));
+                claims.Add(new Claim(ClaimTypes.Role, "Administrator"));
             }
             var token = new JwtSecurityToken(
                 new JwtHeader(

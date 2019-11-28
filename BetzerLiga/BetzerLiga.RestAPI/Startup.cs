@@ -43,7 +43,6 @@ namespace BetzerLiga.RestAPI
             Byte[] secretBytes = new byte[40];
             Random rand = new Random();
             rand.NextBytes(secretBytes);
-
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
             {
                 options.TokenValidationParameters = new TokenValidationParameters
@@ -53,7 +52,7 @@ namespace BetzerLiga.RestAPI
                     ValidateIssuerSigningKey = true,
                     IssuerSigningKey = new SymmetricSecurityKey(secretBytes),
                     ValidateLifetime = true, //validate the expiration and not before values in the token
-                    ClockSkew = TimeSpan.FromMinutes(5) //5 minute tolerance for the expiration date
+                    ClockSkew = TimeSpan.FromMinutes(10) //5 minute tolerance for the expiration date
                 };
             });
 
@@ -76,6 +75,14 @@ namespace BetzerLiga.RestAPI
                 options.SerializerSettings.MaxDepth = 3;
             });
 
+            //CORS
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AllowSpecificOrigin",
+                    builder => builder
+                        .AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
+            });
+
             //Database setup
 
             services.AddTransient<IDBInitializer, DBInitializer>();
@@ -95,11 +102,14 @@ namespace BetzerLiga.RestAPI
                 opt.UseSqlServer(Configuration.GetConnectionString
                 ("defaultConnection")));
             }
+            services.AddCors(options => options.AddPolicy("AllowSpecificOrigin", builder => builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod()));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
+            app.UseCors("AllowSpecificOrigin");
+
             if (env.IsDevelopment())
             {
                 using (var scope = app.ApplicationServices.CreateScope())
@@ -126,6 +136,7 @@ namespace BetzerLiga.RestAPI
                 app.UseHsts();
             }
 
+            app.UseAuthentication();
             app.UseHttpsRedirection();
             app.UseMvc();
         }

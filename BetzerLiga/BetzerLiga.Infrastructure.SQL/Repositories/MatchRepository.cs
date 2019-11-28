@@ -19,6 +19,7 @@ namespace BetzerLiga.Infrastructure.SQL.Repositories
         public Match CreateMatch(Match Match)
         {
             _context.Attach(Match).State = EntityState.Added;
+            _context.SaveChanges();
             return Match;
         }
 
@@ -49,6 +50,7 @@ namespace BetzerLiga.Infrastructure.SQL.Repositories
         public Match UpdateMatch(Match Match)
         {
             _context.Attach(Match).State = EntityState.Modified;
+            _context.SaveChanges();
             return Match;
         }
     }
