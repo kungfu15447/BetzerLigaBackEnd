@@ -37,7 +37,7 @@ namespace BetzerLiga.RestAPI.Controllers
             }
             return Ok(new
             {
-                Username = user.Email,
+                User = user,
                 token = authenticationHelper.GenerateToken(user)
             });
         }
