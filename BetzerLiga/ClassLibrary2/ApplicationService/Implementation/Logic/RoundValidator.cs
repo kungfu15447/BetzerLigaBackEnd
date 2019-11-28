@@ -14,7 +14,7 @@ namespace BetzerLiga.Core.ApplicationService.Implementation.Logic
             {
                 throw new InvalidDataException("bla bla");
             }
-            else if (round.TotalGoals > 0)
+            else if (round.TotalGoals < 0)
             {
                 throw new InvalidDataException("bla bla bla ");
             }
