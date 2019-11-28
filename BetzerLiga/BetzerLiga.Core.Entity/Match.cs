@@ -13,6 +13,7 @@ namespace BetzerLiga.Core.Entity
         public int GuestScore { get; set; }
         public DateTime StartDate { get; set; }
         public Round Round { get; set; }
+        public int RoundId { get; set; }
         public List<UserMatch> Tips { get; set; }
 
     }

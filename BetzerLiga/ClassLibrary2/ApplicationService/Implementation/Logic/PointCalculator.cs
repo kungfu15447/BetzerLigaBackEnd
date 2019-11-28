@@ -29,10 +29,16 @@ namespace BetzerLiga.Core.ApplicationService.Implementation.Logic
             return currentRoundTier;
         }
 
-        public void CalculateTournamentPoints()
+        public void CalculateTournamentPoints(Tournament tournament)
         {
-
+            throw new NotImplementedException();
         }
+
+        
+
+
+
+        
 
 
 
