@@ -18,6 +18,9 @@ namespace BetzerLiga.RestAPI.Initializer
 
         public void Seed(BetzerLigaContext ctx)
         {
+
+
+
             string password = "1234";
             Byte[] passwordHashUser, passwordSaltUser;
 
@@ -32,9 +35,30 @@ namespace BetzerLiga.RestAPI.Initializer
                 PasswordSalt = passwordSaltUser,
                 IsAdmin = false
             };
-            user1 = ctx.Users.Add(user1).Entity;
+
+            Tournament tour1 = new Tournament
+            {
+                Name = "TournaTest",
+                NumberOfRounds = 12,
+                isDone = false,
+                Rounds = new List<Round>(),
+                Participants = new List<UserTour>()
+            };
+
+            UserTour usertour1 = new UserTour
+            {
+                User = user1,
+                TotalUserPoints = 270
+            };
+
+            ctx.Users.Add(user1);
+
+            tour1.Participants.Add(usertour1);
+
+            ctx.Tournaments.Add(tour1);
 
             ctx.SaveChanges();
+            
 
         }
     }
