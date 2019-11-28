@@ -61,5 +61,17 @@ namespace BetzerLiga.Infrastructure.SQL.Repositories
             _context.SaveChanges();
             return UserToUpdate;
         }
+
+        /*
+         * Adds another user to the logged in users following list. 
+         */
+        public void AddFollower(int id, User userFollowing)
+        {
+            User user = GetUserById(id);
+            if(user.Id != userFollowing.Id || user.Id >= 1)
+            {
+                userFollowing.Following.Add(user);
+            }
+        }
     }
 }
