@@ -23,6 +23,7 @@ namespace ServiceTest
             };
             Round round = new Round()
             {
+                Id = 1,
 
             };
             PointCalculator pointCalc = new PointCalculator();

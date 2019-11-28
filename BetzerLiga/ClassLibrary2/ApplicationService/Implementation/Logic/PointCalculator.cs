@@ -10,7 +10,7 @@ namespace BetzerLiga.Core.ApplicationService.Implementation.Logic
     {
         public double CalculateRoundTier(Round round)
         {
-
+            return 0;
         }
     }
 }
