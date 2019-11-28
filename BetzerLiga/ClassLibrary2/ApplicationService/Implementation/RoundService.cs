@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using BetzerLiga.Core.ApplicationService.Implementation.Logic;
 using BetzerLiga.Core.DomainService;
 using BetzerLiga.Core.Entity;
 
@@ -10,18 +11,17 @@ namespace BetzerLiga.Core.ApplicationService.Implementation
     public class RoundService:IRoundService
     {
         private IRoundRepository _roundRepo;
+        private RoundValidator _roundVali;
 
         public RoundService(IRoundRepository roundRepo)
         {
             _roundRepo = roundRepo;
+            _roundVali = new RoundValidator();
         }
         public Round Create(Round round)
         {
-            //if (round.RoundNumber < 1)
-            //{
-            //    throw new InvalidDataException("The RoundNumber cannot be less than 1");
-            //}
-            return _roundRepo.Create(round);
+            var validatedRound = _roundVali.ValidateRound(round);
+            return _roundRepo.Create(validatedRound);
         }
 
         public Round ReadById(int id)
@@ -36,7 +36,8 @@ namespace BetzerLiga.Core.ApplicationService.Implementation
 
         public Round Update(Round roundUpdated)
         {
-            return _roundRepo.Update(roundUpdated);
+            var validatedRound = _roundVali.ValidateRound(roundUpdated);
+            return _roundRepo.Update(validatedRound);
         }
 
         public Round Delete(int id)
