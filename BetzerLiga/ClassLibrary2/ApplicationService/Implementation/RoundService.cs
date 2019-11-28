@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 using BetzerLiga.Core.DomainService;
 using BetzerLiga.Core.Entity;
@@ -16,6 +17,10 @@ namespace BetzerLiga.Core.ApplicationService.Implementation
         }
         public Round Create(Round round)
         {
+            //if (round.RoundNumber < 1)
+            //{
+            //    throw new InvalidDataException("The RoundNumber cannot be less than 1");
+            //}
             return _roundRepo.Create(round);
         }
 
