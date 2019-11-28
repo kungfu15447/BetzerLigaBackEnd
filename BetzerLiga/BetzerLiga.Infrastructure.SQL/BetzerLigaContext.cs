@@ -15,6 +15,11 @@ namespace BetzerLiga.Infrastructure.SQL
 
         protected override void OnModelCreating(ModelBuilder ModelBuilder)
         {
+            ModelBuilder.Entity<Round>()
+                .HasMany<Match>(r => r.Matches)
+                .WithOne(m => m.Round)
+                .HasForeignKey(m => m.Id);
+
             ModelBuilder.Entity<Tournament>()
                 .HasMany(t => t.Participants)
                 .WithOne(p => p.Tournament)
@@ -41,9 +46,6 @@ namespace BetzerLiga.Infrastructure.SQL
             ModelBuilder.Entity<Round>()
                 .HasMany(r => r.Matches)
                 .WithOne(m => m.Round);
-
-            
-
         }
 
         public DbSet<Tournament> Tournaments { get; set; }

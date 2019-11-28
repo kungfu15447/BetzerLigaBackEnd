@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BetzerLiga.RestAPI.Initializer
 {
-    public class DBInitializer
+    public class DBInitializer : IDBInitializer
     {
         private IAuthenticationHelper authenticationHelper;
         public DBInitializer(IAuthenticationHelper authHelper)
@@ -32,6 +32,9 @@ namespace BetzerLiga.RestAPI.Initializer
                 PasswordSalt = passwordSaltUser,
                 IsAdmin = false
             };
+            user1 = ctx.Users.Add(user1).Entity;
+
+            ctx.SaveChanges();
 
         }
     }
