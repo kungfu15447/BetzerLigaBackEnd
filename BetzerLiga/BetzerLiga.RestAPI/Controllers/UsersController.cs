@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using BetzerLiga.Core.ApplicationService;
 using BetzerLiga.Core.Entity;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BetzerLiga.RestAPI.Controllers
@@ -19,6 +20,7 @@ namespace BetzerLiga.RestAPI.Controllers
         }
 
         // GET api/users
+        [Authorize]
         [HttpGet]
         public ActionResult<IEnumerable<User>> Get()
         {
@@ -34,6 +36,7 @@ namespace BetzerLiga.RestAPI.Controllers
         }
 
         // GET api/users/5
+        [Authorize(Roles = "Administrator")]
         [HttpGet("{id}")]
         public ActionResult<User> Get(int id)
         {
@@ -42,6 +45,7 @@ namespace BetzerLiga.RestAPI.Controllers
         }
 
         // POST api/users
+
         [HttpPost]
         public ActionResult<User> Post([FromBody] User user)
         {
