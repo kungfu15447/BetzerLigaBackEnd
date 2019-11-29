@@ -64,6 +64,8 @@ namespace BetzerLiga.Infrastructure.SQL.Repositories
                 _ctx.Entry(roundUpdated).Reference(r => r.Matches).IsModified = true;
             }
                 
+            _ctx.Entry(roundUpdated).Reference(r => r.Matches).IsModified = true;
+
 
             _ctx.SaveChanges();
             return roundUpdated;

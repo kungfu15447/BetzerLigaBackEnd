@@ -35,7 +35,8 @@ namespace BetzerLiga.Infrastructure.SQL.Repositories
             return _context.Tournaments
                 .Include(r => r.Rounds)
                 .Include(t => t.Participants)
-                .ThenInclude(p => p.User);
+                .ThenInclude(p => p.User)
+                .ThenInclude(u => u.Tips);
         }
 
         public Tournament ReadTourById(int Id)
@@ -44,6 +45,7 @@ namespace BetzerLiga.Infrastructure.SQL.Repositories
                 .Include(r => r.Rounds)
                 .Include(t => t.Participants)
                 .ThenInclude(p => p.User)
+                .ThenInclude(u => u.Tips)
                 .FirstOrDefault(t => t.Id == Id);
         }
 
