@@ -30,6 +30,8 @@ namespace BetzerLiga.Infrastructure.SQL.Repositories
                 .ThenInclude(m=>m.Tips)
                 .ThenInclude(um=>um.Match)
                 .Include(r => r.Tournament)
+                .Include(r=>r.RoundPoints)
+                .ThenInclude(ur => ur.User)
                 .FirstOrDefault(r => r.Id == id);
         }
 
@@ -40,6 +42,8 @@ namespace BetzerLiga.Infrastructure.SQL.Repositories
                 .ThenInclude(m => m.Tips)
                 .ThenInclude(um => um.Match)
                 .Include(r=>r.Tournament)
+                .Include(r => r.RoundPoints)
+                .ThenInclude(ur => ur.User)
                 .ToList();
         }
 
