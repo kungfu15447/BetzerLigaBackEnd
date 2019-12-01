@@ -18,9 +18,9 @@ namespace BetzerLiga.Infrastructure.SQL.Repositories
         }
         public Round Create(Round round)
         {
-            var roundSaved = _ctx.Rounds.Add(round).Entity;
+            _ctx.Attach(round).State = EntityState.Added;
             _ctx.SaveChanges();
-            return roundSaved;
+            return round;
         }
 
         public Round ReadById(int id)
