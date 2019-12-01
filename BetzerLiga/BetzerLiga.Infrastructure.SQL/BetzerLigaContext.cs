@@ -45,6 +45,16 @@ namespace BetzerLiga.Infrastructure.SQL
                 .HasOne(r => r.Tournament)
                 .WithMany(t => t.Rounds)
                 .HasForeignKey(r => r.TournamentId);
+
+            ModelBuilder.Entity<UserRound>()
+                .HasOne<Round>(ur => ur.Round)
+                .WithMany(r => r.RoundPoints)
+                .HasForeignKey(ur => ur.RoundId);
+
+            ModelBuilder.Entity<UserRound>()
+                .HasOne<User>(ur => ur.User)
+                .WithMany(u => u.RoundPoints)
+                .HasForeignKey(ur => ur.UserId);
         }
 
         public DbSet<Tournament> Tournaments { get; set; }
