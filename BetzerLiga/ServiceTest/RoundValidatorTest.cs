@@ -25,5 +25,40 @@ namespace ServiceTest
             Assert.Throws<InvalidDataException>(()=> rv.ValidateRound(round));
 
         }
+
+        [Fact]
+        private void TestForLastRoundInListByRoundNumber()
+        {
+            RoundValidator rv = new RoundValidator();
+            var rounds = new List<Round>();
+            var round1 = new Round
+            {
+                RoundNumber = 1,
+                TournamentId = 1
+            };
+            var round2 = new Round
+            {
+                RoundNumber = 2,
+                TournamentId = 1
+            };
+            var round3 = new Round
+            {
+                RoundNumber = 3,
+                TournamentId = 1
+            };
+            var round4 = new Round
+            {
+                RoundNumber = 3,
+                TournamentId = 2
+            };
+
+            rounds.Add(round1);
+            rounds.Add(round2);
+            rounds.Add(round3);
+            rounds.Add(round4);
+
+            Assert.Equal(round3, rv.ValidateCurrentRound(rounds));
+
+        }
     }
 }

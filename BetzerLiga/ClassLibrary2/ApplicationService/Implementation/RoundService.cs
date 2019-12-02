@@ -44,5 +44,10 @@ namespace BetzerLiga.Core.ApplicationService.Implementation
         {
             return _roundRepo.Delete(id);
         }
+
+        public Round GetCurrentRoundFromTournament()
+        {
+            return _roundVali.ValidateCurrentRound(_roundRepo.ReadAll());
+        }
     }
 }

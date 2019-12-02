@@ -16,5 +16,7 @@ namespace BetzerLiga.Core.ApplicationService
         User Update(User UserToUpdate);
 
         User Delete(int id);
+
+        
     }
 }

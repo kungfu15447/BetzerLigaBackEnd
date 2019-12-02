@@ -127,6 +127,71 @@ namespace BetzerLiga.RestAPI.Initializer
                 TotalUserPoints = 150
             };
 
+            Round round1 = new Round
+            {
+                RoundNumber = 1,
+                TotalGoals = 14,
+                RoundPoints = new List<UserRound>(),
+                Matches = new List<Match>(),
+                TournamentId = 1,
+            };
+            Round round2 = new Round
+            {
+                RoundNumber = 2,
+                TotalGoals = 23,
+                RoundPoints = new List<UserRound>(),
+                Matches = new List<Match>(),
+                TournamentId = 1
+            };
+            Round round3 = new Round
+            {
+                RoundNumber = 3,
+                TotalGoals = 17,
+                RoundPoints = new List<UserRound>(),
+                Matches = new List<Match>(),
+                TournamentId = 1
+            };
+            Round round4 = new Round
+            {
+                RoundNumber = 1,
+                TotalGoals = 10,
+                RoundPoints = new List<UserRound>(),
+                Matches = new List<Match>(),
+                TournamentId = 1
+            };
+
+            UserRound userRound1 = new UserRound
+            {
+                User = user1,
+                UserPoints = 24,
+            };
+            UserRound userRound2 = new UserRound
+            {
+                User = user2,
+                UserPoints = 13,
+            };
+            UserRound userRound3 = new UserRound
+            {
+                User = user3,
+                UserPoints = 56,
+            }; 
+            UserRound userRound4 = new UserRound
+            {
+                User = user4,
+                UserPoints = 76,
+            };
+
+            round1.RoundPoints.Add(userRound1);
+            round1.RoundPoints.Add(userRound2);
+            round2.RoundPoints.Add(userRound1);
+            round2.RoundPoints.Add(userRound2);
+            round2.RoundPoints.Add(userRound3);
+            round2.RoundPoints.Add(userRound4);
+            round3.RoundPoints.Add(userRound1);
+            round3.RoundPoints.Add(userRound2);
+            round4.RoundPoints.Add(userRound1);
+            round4.RoundPoints.Add(userRound4);
+
 
             tour1.Participants.Add(usertour1);
             tour1.Participants.Add(usertour2);
@@ -135,9 +200,12 @@ namespace BetzerLiga.RestAPI.Initializer
             tour1.Participants.Add(usertour5);
             tour1.Participants.Add(usertour6);
 
+            tour1.Rounds.Add(round1);
+            tour1.Rounds.Add(round2);
+            tour1.Rounds.Add(round3);
+            tour1.Rounds.Add(round4);
 
             ctx.Tournaments.Add(tour1);
-
 
             user1 = ctx.Users.Add(user1).Entity;
             user2 = ctx.Users.Add(user2).Entity;
