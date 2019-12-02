@@ -174,6 +174,9 @@ namespace ServiceTest
             user1.Tips.Add(tips1);
             user1.Tips.Add(tips2);
             user1.Tips.Add(tips3);
+            match1.Tips.Add(tips1);
+            match2.Tips.Add(tips2);
+            match3.Tips.Add(tips3);
             user1.Tournaments.Add(ustour);
             user1.RoundPoints.Add(usRound);
 
@@ -240,6 +243,15 @@ namespace ServiceTest
             int expectedResult = points;
             int actualResult = pointCalc.CalculateRatingBonus(rating);
             Assert.Equal(expectedResult, actualResult);
+        }
+
+        [Theory]
+        [InlineData(5, 10)]
+        public void TestCalculateBonusTierPoints(int pointsTesting, int roundNumber)
+        {
+            PointCalculator pointCalc = new PointCalculator();
+            pointCalc.CalculateBonusTierPoints(pointsTesting);
+            
         }
     }
 }
