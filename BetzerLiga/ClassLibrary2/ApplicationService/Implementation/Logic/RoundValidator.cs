@@ -42,7 +42,7 @@ namespace BetzerLiga.Core.ApplicationService.Implementation.Logic
                 }
             }
 
-            return listSorted.FirstOrDefault(r=>r.RoundNumber==currentRound);
+            return listSorted.FirstOrDefault(r => r.RoundNumber == currentRound);
 
         }
     }

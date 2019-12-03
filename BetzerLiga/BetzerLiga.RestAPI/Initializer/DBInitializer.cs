@@ -183,13 +183,19 @@ namespace BetzerLiga.RestAPI.Initializer
 
             round1.RoundPoints.Add(userRound1);
             round1.RoundPoints.Add(userRound2);
+            round1.RoundPoints.Add(userRound3);
+            round1.RoundPoints.Add(userRound4);
             round2.RoundPoints.Add(userRound1);
             round2.RoundPoints.Add(userRound2);
             round2.RoundPoints.Add(userRound3);
             round2.RoundPoints.Add(userRound4);
             round3.RoundPoints.Add(userRound1);
             round3.RoundPoints.Add(userRound2);
+            round3.RoundPoints.Add(userRound3);
+            round3.RoundPoints.Add(userRound4);
             round4.RoundPoints.Add(userRound1);
+            round4.RoundPoints.Add(userRound2);
+            round4.RoundPoints.Add(userRound3);
             round4.RoundPoints.Add(userRound4);
 
 

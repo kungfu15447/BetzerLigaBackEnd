@@ -17,20 +17,5 @@ namespace ServiceTest
 {
     public class RoundServiceTest
     {
-
-
-        //[Theory]
-        //[InlineData(-1)]
-        //[InlineData(-10)]
-        //private void TestExceptionThrownWhenRoundNumberIsLessThanOne(int roundNumber)
-        //{
-        //    IRoundService roundService = new RoundService();
-        //    var round = new Round
-        //    {
-        //        RoundNumber = roundNumber
-        //    };
-        //    Assert.Throws<InvalidDataException>(() => _roundService.Create(round));
-            
-        //}
     }
 }
