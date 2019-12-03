@@ -153,7 +153,7 @@ namespace BetzerLiga.RestAPI.Initializer
             };
             Round round4 = new Round
             {
-                RoundNumber = 1,
+                RoundNumber = 4,
                 TotalGoals = 10,
                 RoundPoints = new List<UserRound>(),
                 Matches = new List<Match>(),
@@ -180,19 +180,25 @@ namespace BetzerLiga.RestAPI.Initializer
                 User = user4,
                 UserPoints = 76,
             };
+            UserRound userRound5 = new UserRound()
+            {
 
-            round1.RoundPoints.Add(userRound1);
-            round1.RoundPoints.Add(userRound2);
-            round1.RoundPoints.Add(userRound3);
-            round1.RoundPoints.Add(userRound4);
-            round2.RoundPoints.Add(userRound1);
-            round2.RoundPoints.Add(userRound2);
-            round2.RoundPoints.Add(userRound3);
-            round2.RoundPoints.Add(userRound4);
-            round3.RoundPoints.Add(userRound1);
-            round3.RoundPoints.Add(userRound2);
-            round3.RoundPoints.Add(userRound3);
-            round3.RoundPoints.Add(userRound4);
+                User = user1,
+                UserPoints =  24
+            };
+
+            //round1.RoundPoints.Add(userRound1);
+            //round1.RoundPoints.Add(userRound2);
+            //round1.RoundPoints.Add(userRound3);
+            //round1.RoundPoints.Add(userRound4);
+            //round2.RoundPoints.Add(userRound1);
+            //round2.RoundPoints.Add(userRound2);
+            //round2.RoundPoints.Add(userRound3);
+            //round2.RoundPoints.Add(userRound4);
+            //round3.RoundPoints.Add(userRound1);
+            //round3.RoundPoints.Add(userRound2);
+            //round3.RoundPoints.Add(userRound3);
+            //round3.RoundPoints.Add(userRound4);
             round4.RoundPoints.Add(userRound1);
             round4.RoundPoints.Add(userRound2);
             round4.RoundPoints.Add(userRound3);
@@ -211,14 +217,22 @@ namespace BetzerLiga.RestAPI.Initializer
             tour1.Rounds.Add(round3);
             tour1.Rounds.Add(round4);
 
-            ctx.Tournaments.Add(tour1);
-
             user1 = ctx.Users.Add(user1).Entity;
             user2 = ctx.Users.Add(user2).Entity;
             user3 = ctx.Users.Add(user3).Entity;
             user4 = ctx.Users.Add(user4).Entity;
             user5 = ctx.Users.Add(user5).Entity;
             user6 = ctx.Users.Add(user6).Entity;
+
+
+            ctx.Tournaments.Add(tour1);
+
+            ctx.Rounds.Add(round1);
+            ctx.Rounds.Add(round2);
+            ctx.Rounds.Add(round3);
+            ctx.Rounds.Add(round4);
+
+            
 
 
             ctx.SaveChanges();

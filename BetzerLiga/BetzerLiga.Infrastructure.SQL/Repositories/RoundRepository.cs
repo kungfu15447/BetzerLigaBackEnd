@@ -26,13 +26,13 @@ namespace BetzerLiga.Infrastructure.SQL.Repositories
         public Round ReadById(int id)
         {
             return _ctx.Rounds
+                .Include(r => r.RoundPoints)
+                .ThenInclude(ur => ur.User)
                 .Include(r=>r.Matches)
                 .ThenInclude(m=>m.Tips)
                 .ThenInclude(um=>um.Match)
                 .Include(r => r.Tournament)
                 .ThenInclude(t => t.Participants)
-                .Include(r=>r.RoundPoints)
-                .ThenInclude(ur => ur.User)
                 .FirstOrDefault(r => r.Id == id);
         }
 

@@ -21,10 +21,27 @@ namespace BetzerLiga.RestAPI.Controllers
         }
         // GET api/values
         [HttpGet]
-        public ActionResult<List<Round>> Get()
+        public ActionResult<List<Round>> Get([FromQuery]string tournament)
         {
-            return _roundService.ReadAll();
+            try
+                    {
+                if (tournament == "tour")
+                {
+                    var list = new List<Round>() { _roundService.GetCurrentRoundFromTournament() };
+                    return Ok(list);
+                }
+                else
+                {
+                    return Ok(_roundService.ReadAll());
+                }
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.StackTrace);
+            }
+
         }
+
         // GET api/values/5
         [HttpGet("{id}")]
         public ActionResult<Round> Get(int id)
