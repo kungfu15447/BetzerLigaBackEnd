@@ -358,11 +358,9 @@ namespace BetzerLiga.RestAPI.Initializer
             tour1.Participants.Add(usertour1);
             tour1.Participants.Add(usertour2);
             tour1.Participants.Add(usertour3);
-            tour1.Participants.Add(usertour4);
-            tour1.Participants.Add(usertour5);
-            tour1.Participants.Add(usertour6);
-
-            tour1.Rounds.Add(round1);
+            //tour1.Participants.Add(usertour4);
+            //tour1.Participants.Add(usertour5);
+            //tour1.Participants.Add(usertour6);
             /*tour1.Rounds.Add(round2);
             tour1.Rounds.Add(round3);
             tour1.Rounds.Add(round4);*/
