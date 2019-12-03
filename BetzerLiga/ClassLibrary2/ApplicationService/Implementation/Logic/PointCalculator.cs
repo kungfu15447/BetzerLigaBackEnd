@@ -206,5 +206,10 @@ namespace BetzerLiga.Core.ApplicationService.Implementation.Logic
             return totalGoals;
         }
 
+        public void SetRoundTier(int roundTier)
+        {
+            _defaultRoundTier = roundTier;
+        }
+
     }
 }

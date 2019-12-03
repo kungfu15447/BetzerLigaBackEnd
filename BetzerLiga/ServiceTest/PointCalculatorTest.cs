@@ -270,7 +270,7 @@ namespace ServiceTest
                 Tournament = tour,
                 TournamentId = tour.Id
             };
-            pointCalc.CalculateRoundTier(round);
+            pointCalc.SetRoundTier(pointCalc.CalculateRoundTier(round));
             int actualResult = pointCalc.CalculateBonusTierPoints(pointsTesting);
             Assert.Equal(expectedResult, actualResult);
         }
