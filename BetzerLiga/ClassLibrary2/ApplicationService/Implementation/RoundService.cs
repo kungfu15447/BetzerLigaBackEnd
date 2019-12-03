@@ -5,6 +5,7 @@ using System.Text;
 using BetzerLiga.Core.ApplicationService.Implementation.Logic;
 using BetzerLiga.Core.DomainService;
 using BetzerLiga.Core.Entity;
+using System.Linq;
 
 namespace BetzerLiga.Core.ApplicationService.Implementation
 {

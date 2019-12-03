@@ -41,8 +41,11 @@ namespace BetzerLiga.Core.ApplicationService.Implementation.Logic
                     currentRound = round.RoundNumber;
                 }
             }
-
-            return listSorted.FirstOrDefault(r => r.RoundNumber == currentRound);
+            Round realRound = listSorted.FirstOrDefault(r => r.RoundNumber == currentRound);
+            var sortedByUserpoints = realRound.RoundPoints.OrderByDescending(ur => ur.UserPoints);
+            realRound.RoundPoints = new List<UserRound>();
+            realRound.RoundPoints.AddRange(sortedByUserpoints);
+            return realRound;
 
         }
     }
