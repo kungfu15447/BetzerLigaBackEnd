@@ -14,6 +14,7 @@ namespace BetzerLiga.Core.ApplicationService.Implementation.Logic
         private int _defaultRightPoints = 2;
         private int _defaultRatingPoint = 12;
         private int _defaultRoundTier = 0;
+        private int _defaultPointsForTotalGoals = 30;
         public int CalculateRoundTier(Round round)
         {
             int currentRoundTier;
@@ -66,15 +67,16 @@ namespace BetzerLiga.Core.ApplicationService.Implementation.Logic
                 || (tip.HomeTip < tip.GuestTip && match.HomeScore < match.GuestScore)
                 || (tip.HomeTip == tip.GuestTip && match.HomeScore == match.GuestScore))
             {
-                pointsForMatch += _defaultRightWin + CalculateRatingBonus(tip.Rating);
+                pointsForMatch += CalculateBonusTierPoints(_defaultRightWin) + 
+                    CalculateBonusTierPoints(CalculateRatingBonus(tip.Rating));
             }
             if (tip.HomeTip == match.HomeScore && tip.GuestTip == match.GuestScore)
             {
-                pointsForMatch += _defaultRightResult;
+                pointsForMatch += CalculateBonusTierPoints(_defaultRightResult);
             }
             if (tip.HomeTip == match.GuestScore && tip.GuestTip == match.HomeScore)
             {
-                pointsForMatch += _defaultRightPoints;
+                pointsForMatch += CalculateBonusTierPoints(_defaultRightPoints);
             }
 
             return pointsForMatch;
@@ -82,6 +84,7 @@ namespace BetzerLiga.Core.ApplicationService.Implementation.Logic
 
         public int CalculateRatingBonus(int rating)
         {
+            int degradeRating = 2;
             if (rating == 0)
             {
                 return 0;
@@ -90,7 +93,7 @@ namespace BetzerLiga.Core.ApplicationService.Implementation.Logic
                 int ratingBonus = _defaultRatingPoint;
                 for (int i = rating; i > 1; i--)
                 {
-                    ratingBonus -= 2;
+                    ratingBonus -= degradeRating;
                 }
                 return ratingBonus;
             }       
@@ -98,11 +101,31 @@ namespace BetzerLiga.Core.ApplicationService.Implementation.Logic
 
         public int CalculateBonusTierPoints(int points)
         {
-            throw new NotFiniteNumberException();
+            double pointsToBeCalculated = points;
+            for (int i = 1; i < _defaultRoundTier; i++)
+            {
+                pointsToBeCalculated = Math.Ceiling(pointsToBeCalculated *= _multiplier);
+            }
+
+            return Convert.ToInt32(pointsToBeCalculated);
         }
 
         
+        public int CalculatePointsForTotalGoalsThisRound(Round round, int goalsGuessedByUser)
+        {
+            if (round.TotalGoals == goalsGuessedByUser)
+            {
+                return CalculateBonusTierPoints(_defaultPointsForTotalGoals);
+            }else
+            {
+                return 0;
+            }
+        }
 
+        public int CalculatePointsForTotalMatchesCorrect(int indexForCorrectMatches)
+        {
+            throw new NotImplementedException();
+        }
 
 
 

@@ -246,12 +246,50 @@ namespace ServiceTest
         }
 
         [Theory]
-        [InlineData(5, 10)]
-        public void TestCalculateBonusTierPoints(int pointsTesting, int roundNumber)
+        [InlineData(6, 10, 8)]
+        [InlineData(6, 12, 10)]
+        [InlineData(6, 3, 6)]
+        [InlineData(12, 8, 15)]
+        [InlineData(12, 11, 19)]
+        [InlineData(12, 1, 12)]
+        public void TestCalculateBonusTierPoints(int pointsTesting, int roundNumber, int expectedResult)
         {
             PointCalculator pointCalc = new PointCalculator();
-            pointCalc.CalculateBonusTierPoints(pointsTesting);
-            
+            Tournament tour = new Tournament
+            {
+                Id = 1,
+                NumberOfRounds = 14,
+                Name = "Testuring",
+                isDone = false
+            };
+            Round round = new Round
+            {
+                Id = 1,
+                RoundNumber = roundNumber,
+                TotalGoals = 0,
+                Tournament = tour,
+                TournamentId = tour.Id
+            };
+            pointCalc.CalculateRoundTier(round);
+            int actualResult = pointCalc.CalculateBonusTierPoints(pointsTesting);
+            Assert.Equal(expectedResult, actualResult);
+        }
+        
+        [Theory]
+        [InlineData(20, 30)]
+        [InlineData(21, 0)]
+        public void TestCalculatePointsForTotalGoalsThisRound(int goalsGuessedByUser, int expectedResult)
+        {
+            Round round = new Round
+            {
+                Id = 1,
+                RoundNumber = 1,
+                TotalGoals = 20
+            };
+
+            PointCalculator pointCalc = new PointCalculator();
+            int actualResult = pointCalc.CalculatePointsForTotalGoalsThisRound(round, goalsGuessedByUser);
+            Assert.Equal(expectedResult, actualResult);
         }
     }
 }
