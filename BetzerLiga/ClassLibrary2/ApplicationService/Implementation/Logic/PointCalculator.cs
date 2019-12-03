@@ -13,8 +13,10 @@ namespace BetzerLiga.Core.ApplicationService.Implementation.Logic
         private int _defaultRightResult = 20;
         private int _defaultRightPoints = 2;
         private int _defaultRatingPoint = 12;
-        private int _defaultRoundTier = 0;
+        private int _defaultRoundTier = 1;
         private int _defaultPointsForTotalGoals = 30;
+        private int _defaultPointsForTotalMatchesCorrect = 3;
+        private int _defaultPointsForWinner = 27;
         public int CalculateRoundTier(Round round)
         {
             int currentRoundTier;
@@ -32,31 +34,56 @@ namespace BetzerLiga.Core.ApplicationService.Implementation.Logic
             {
                 currentRoundTier = 1;
             }
-            _defaultRoundTier = currentRoundTier;
             return currentRoundTier;
         }
 
         public void CalculateTournamentPoints(Tournament tournament)
         {
-            foreach (UserTour user in tournament.Participants)
-            {
-                foreach (Round round in tournament.Rounds)
-                {
 
+            foreach (Round round in tournament.Rounds)
+            {
+                _defaultRoundTier = CalculateRoundTier(round);
+                round.TotalGoals = CalculateTotalGoalsThisRound(round);
+                foreach (UserTour user in tournament.Participants)
+                {
+                    UserRound currentUser = round.RoundPoints.FirstOrDefault(r => r.UserId == user.UserId);
+                    currentUser.UserPoints = CalculateRoundForUser(round, user.User);
+
+                    int totalGoalsGuessedByUser = CalculateTotalGoalsThisRoundByUser(round, user.User);
+                    currentUser.UserPoints += CalculatePointsForTotalGoalsThisRound(round, totalGoalsGuessedByUser);
                 }
+
+                round.RoundPoints = round.RoundPoints.OrderByDescending(ur => ur.UserPoints).ToList();
+                CalculatePointsForWinnersThisRound(round);
+            }
+
+            foreach(UserTour user in tournament.Participants)
+            {
+                foreach(Round round in tournament.Rounds)
+                {
+                    user.TotalUserPoints = 0;
+                    user.TotalUserPoints += round.RoundPoints.FirstOrDefault(r => r.UserId == user.UserId).UserPoints;
+                } 
             }
         }
 
         public int CalculateRoundForUser(Round round, User user)
         {
+            int correctMatchesGuessed = 0;
             int totalRoundPoints = 0;
+
             foreach (Match match in round.Matches)
             {
                 UserMatch tips = match.Tips.FirstOrDefault(t => t.UserId == user.Id);
                 tips.TotalPoints = CalculateTips(tips, match);
+                if (tips.TotalPoints > CalculateBonusTierPoints(_defaultRightPoints))
+                {
+                    correctMatchesGuessed++;
+                }
                 totalRoundPoints += tips.TotalPoints;
             }
 
+            totalRoundPoints += CalculatePointsForTotalMatchesCorrect(correctMatchesGuessed);
             return totalRoundPoints;
         }
 
@@ -124,10 +151,60 @@ namespace BetzerLiga.Core.ApplicationService.Implementation.Logic
 
         public int CalculatePointsForTotalMatchesCorrect(int indexForCorrectMatches)
         {
-            throw new NotImplementedException();
+            int startingPointsApplier = 4;
+            int pointsCalculated = 0;
+            int startingValue = 5;
+            if (indexForCorrectMatches >= startingValue)
+            {
+                pointsCalculated = _defaultPointsForTotalMatchesCorrect;
+                for (int i = startingValue; i < indexForCorrectMatches; i++)
+                {
+                    pointsCalculated += startingPointsApplier;
+                    startingPointsApplier++;
+                }
+            }
+            return CalculateBonusTierPoints(pointsCalculated);
         }
 
+        public void CalculatePointsForWinnersThisRound(Round round)
+        {
+            int lowestWinnerInLeaderBoard = 6;
+            int pointsDegrader = 7;
+            int points = _defaultPointsForWinner;
 
+            if (round.RoundPoints.Count <= lowestWinnerInLeaderBoard)
+            {
+                lowestWinnerInLeaderBoard = round.RoundPoints.Count;
+            }
+
+            for (int i = 0; i < lowestWinnerInLeaderBoard; i++)
+            {
+                round.RoundPoints[i].UserPoints += CalculateBonusTierPoints(points);
+                points -= pointsDegrader;
+                pointsDegrader--;
+            }
+        }
+
+        private int CalculateTotalGoalsThisRound(Round round)
+        {
+            int totalGoals = 0;
+            foreach (Match match in round.Matches)
+            {
+                totalGoals += (match.HomeScore + match.GuestScore);
+            }
+            return totalGoals;
+        }
+
+        private int CalculateTotalGoalsThisRoundByUser(Round round, User user)
+        {
+            int totalGoals = 0;
+            foreach(Match match in round.Matches)
+            {
+                UserMatch tips = match.Tips.FirstOrDefault(t => t.UserId == user.Id);
+                totalGoals += (tips.GuestTip + tips.HomeTip);
+            }
+            return totalGoals;
+        }
 
     }
 }

@@ -290,6 +290,90 @@ namespace ServiceTest
             PointCalculator pointCalc = new PointCalculator();
             int actualResult = pointCalc.CalculatePointsForTotalGoalsThisRound(round, goalsGuessedByUser);
             Assert.Equal(expectedResult, actualResult);
+        
+        }
+
+        [Theory]
+        [InlineData(5, 3)]
+        [InlineData(6, 7)]
+        [InlineData(7, 12)]
+        [InlineData(8, 18)]
+        [InlineData(9, 25)]
+        [InlineData(10, 33)]
+        [InlineData(11, 42)]
+        [InlineData(12, 52)]
+        public void TestCalculatePointsForTotalMatchesCorrect(int matchesWon, int expectedResult)
+        {
+            PointCalculator pointCalc = new PointCalculator();
+            int actualResult = pointCalc.CalculatePointsForTotalMatchesCorrect(matchesWon);
+            Assert.Equal(expectedResult, actualResult);
+        }
+
+        [Fact]
+        public void TestCalculatePointsForWinnersThisRound()
+        {
+            Round round = new Round()
+            {
+                Id = 1,
+                RoundNumber = 1,
+                TotalGoals = 38,
+                TournamentId = 1,
+                RoundPoints = new List<UserRound>()
+            };
+            User user1 = new User()
+            {
+                Id = 1,
+                Firstname = "Hans",
+                Lastname = "Jørgen"
+            };
+            User user2 = new User()
+            {
+                Id = 2,
+                Firstname = "Frederik",
+                Lastname = "Riksen"
+            };
+            User user3 = new User()
+            {
+                Id = 3,
+                Firstname = "Karl",
+                Lastname = "Bæk"
+            };
+            UserRound UR1 = new UserRound()
+            {
+                Id = 1,
+                User = user1,
+                UserId = user1.Id,
+                Round = round,
+                RoundId = round.Id,
+                UserPoints = 3
+            };
+            UserRound UR2 = new UserRound()
+            {
+                Id = 1,
+                User = user2,
+                UserId = user2.Id,
+                Round = round,
+                RoundId = round.Id,
+                UserPoints = 2
+            };
+            UserRound UR3 = new UserRound()
+            {
+                Id = 1,
+                User = user3,
+                UserId = user3.Id,
+                Round = round,
+                RoundId = round.Id,
+                UserPoints = 1
+            };
+            round.RoundPoints.Add(UR1);
+            round.RoundPoints.Add(UR2);
+            round.RoundPoints.Add(UR3);
+
+            PointCalculator pointCalc = new PointCalculator();
+            pointCalc.CalculatePointsForWinnersThisRound(round);
+            Assert.Equal(30, round.RoundPoints[0].UserPoints);
+            Assert.Equal(22, round.RoundPoints[1].UserPoints);
+            Assert.Equal(15, round.RoundPoints[2].UserPoints);
         }
     }
 }
