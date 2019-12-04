@@ -15,6 +15,6 @@ namespace BetzerLiga.Core.Entity
         public byte[] PasswordSalt { get; set; }
         public List<UserTour> Tournaments { get; set; }
         public List<UserMatch> Tips { get; set; }
-        public List<User> Following { get; set; }
+        public List<Follower> Following { get; set; }
     }
 }

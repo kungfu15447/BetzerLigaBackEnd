@@ -46,11 +46,23 @@ namespace BetzerLiga.Infrastructure.SQL
             ModelBuilder.Entity<Round>()
                 .HasMany(r => r.Matches)
                 .WithOne(m => m.Round);
+
+            ModelBuilder.Entity<Follower>()
+                .HasOne(f => f.AuthorizedUser)
+                .WithMany()
+                .HasForeignKey(f => f.AuthorizedUserId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            ModelBuilder.Entity<Follower>()
+                .HasOne(f => f.Follow)
+                .WithMany()
+                .HasForeignKey(f => f.FollowId);
         }
 
         public DbSet<Tournament> Tournaments { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Match> Matches { get; set; }
         public DbSet<Round> Rounds { get; set; }
+        public DbSet<Follower> Following { get; set; }
     }
 }

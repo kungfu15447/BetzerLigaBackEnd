@@ -20,7 +20,7 @@ namespace BetzerLiga.RestAPI.Controllers
         }
 
         // GET api/users
-        [Authorize]
+        //[Authorize]
         [HttpGet]
         public ActionResult<IEnumerable<User>> Get()
         {
@@ -36,7 +36,7 @@ namespace BetzerLiga.RestAPI.Controllers
         }
 
         // GET api/users/5
-        [Authorize(Roles = "Administrator")]
+        //[Authorize(Roles = "Administrator")]
         [HttpGet("{id}")]
         public ActionResult<User> Get(int id)
         {
@@ -60,7 +60,8 @@ namespace BetzerLiga.RestAPI.Controllers
             {
                 return BadRequest("Parameter id and user id must be the same");
             }
-            _userServ.Update(user);
+            User testUser = _userServ.Update(user);
+            
             return Ok();
         }
 

@@ -34,7 +34,7 @@ namespace BetzerLiga.RestAPI.Initializer
                 PasswordHash = passwordHashUser,
                 PasswordSalt = passwordSaltUser,
                 IsAdmin = true,
-                
+                Following = new List<Follower>()
             };
 
             User user2 = new User
