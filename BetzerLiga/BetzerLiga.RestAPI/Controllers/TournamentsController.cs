@@ -21,8 +21,13 @@ namespace BetzerLiga.RestAPI.Controllers
         }
 
         [HttpGet]
-        public ActionResult<List<Tournament>> Get()
+        public ActionResult<List<Tournament>> Get([FromQuery] string tournament)
         {
+            if (tournament.Equals("currentTournament"))
+            {
+                List<Tournament> list = new List<Tournament>() { _tourService.GetCurrentOnGoingTournament() };
+                return Ok(list);
+            }
             return Ok(_tourService.GetAllTour());
         }
 

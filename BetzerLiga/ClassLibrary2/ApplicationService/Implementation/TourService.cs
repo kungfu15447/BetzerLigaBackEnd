@@ -12,10 +12,12 @@ namespace BetzerLiga.Core.ApplicationService.Implementation
     {
         private ITourRepository _tourRepo;
         private PointCalculator _pointCalc;
+        private TournamentValidator _tourVali;
         public TourService(ITourRepository tourRepo)
         {
             _tourRepo = tourRepo;
             _pointCalc = new PointCalculator();
+            _tourVali = new TournamentValidator();
         }
         public Tournament CreateTournament(Tournament Tour)
         {
@@ -38,6 +40,16 @@ namespace BetzerLiga.Core.ApplicationService.Implementation
                 }
             }
             return tournaments;
+        }
+
+        public Tournament GetCurrentOnGoingTournament()
+        {
+            Tournament onGoingTournament = _tourVali.GetOnGoingTournament(_tourRepo.ReadAll().ToList());
+            if (onGoingTournament != null)
+            {
+                _pointCalc.CalculateTournamentPoints(onGoingTournament);
+            }
+            return onGoingTournament;
         }
 
         public Tournament GetTourById(int id)
