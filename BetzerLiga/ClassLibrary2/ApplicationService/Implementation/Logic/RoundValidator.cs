@@ -28,7 +28,7 @@ namespace BetzerLiga.Core.ApplicationService.Implementation.Logic
             List<Round> listSorted = new List<Round>();
             foreach (var round in roundList)
             {
-                if (!round.Tournament.isDone)
+                if (!round.Tournament.IsDone)
                 {
                     listSorted.Add(round);
                 }

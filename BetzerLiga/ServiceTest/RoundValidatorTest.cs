@@ -67,12 +67,12 @@ namespace ServiceTest
             var tour1 = new Tournament
             {
                 Id = 1,
-                isDone = true
+                IsDone = true
             };
             var tour2 = new Tournament
             {
                 Id = 2,
-                isDone = false
+                IsDone = false
             };
 
             round1.Tournament = tour1;

@@ -32,7 +32,7 @@ namespace BetzerLiga.Core.ApplicationService.Implementation
             List<Tournament> tournaments = _tourRepo.ReadAll().ToList();
             foreach (Tournament tournament in tournaments)
             {
-                if (!tournament.isDone)
+                if (!tournament.IsDone)
                 {
                     _pointCalc.CalculateTournamentPoints(tournament);
                 }
@@ -43,7 +43,7 @@ namespace BetzerLiga.Core.ApplicationService.Implementation
         public Tournament GetTourById(int id)
         {
             Tournament tournament = _tourRepo.ReadTourById(id);
-            if (!tournament.isDone)
+            if (!tournament.IsDone)
             {
                 _pointCalc.CalculateTournamentPoints(tournament);
                 tournament.Participants.OrderByDescending(ut => ut.TotalUserPoints);
