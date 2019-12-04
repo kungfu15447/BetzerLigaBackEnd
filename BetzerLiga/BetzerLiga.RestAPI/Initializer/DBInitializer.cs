@@ -107,7 +107,7 @@ namespace BetzerLiga.RestAPI.Initializer
             {
                 Name = "TournaTest",
                 NumberOfRounds = 12,
-                isDone = false,
+                IsDone = false,
                 Rounds = new List<Round>(),
                 Participants = new List<UserTour>()
             };
@@ -561,10 +561,11 @@ namespace BetzerLiga.RestAPI.Initializer
             //tour1.Participants.Add(usertour5);
             //tour1.Participants.Add(usertour6);
 
-            tour1.Rounds.Add(round1);
+            
             round1.Matches.Add(match1);
             round1.Matches.Add(match2);
             round1.Matches.Add(match3);
+            tour1.Rounds.Add(round1);
             round1.RoundPoints.Add(userRound1);
             round1.RoundPoints.Add(userRound2);
             round1.RoundPoints.Add(userRound3);

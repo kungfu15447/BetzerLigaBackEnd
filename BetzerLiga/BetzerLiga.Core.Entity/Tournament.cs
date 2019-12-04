@@ -9,7 +9,8 @@ namespace BetzerLiga.Core.Entity
         public int Id { get; set; }
         public string Name { get; set; }
         public int NumberOfRounds { get; set; }
-        public bool isDone { get; set; }
+        public bool IsDone { get; set; }
+        public DateTime StartDate { get; set; }
         public List<Round> Rounds { get; set; }
         public List<UserTour> Participants { get; set; }
     }

@@ -47,12 +47,15 @@ namespace BetzerLiga.Core.ApplicationService.Implementation.Logic
                 foreach (UserTour user in tournament.Participants)
                 {
                     UserRound currentUser = round.RoundPoints.FirstOrDefault(r => r.UserId == user.UserId);
-                    currentUser.UserPoints = CalculateRoundForUser(round, user.User);
+                    if (currentUser != null)
+                    {
+                        currentUser.UserPoints = CalculateRoundForUser(round, user.User);
 
-                    int totalGoalsGuessedByUser = CalculateTotalGoalsThisRoundByUser(round, user.User);
-                    currentUser.UserPoints += CalculatePointsForTotalGoalsThisRound(round, totalGoalsGuessedByUser);
+                        int totalGoalsGuessedByUser = CalculateTotalGoalsThisRoundByUser(round, user.User);
+                        currentUser.UserPoints += CalculatePointsForTotalGoalsThisRound(round, totalGoalsGuessedByUser);
+                    }
+                    
                 }
-
                 round.RoundPoints = round.RoundPoints.OrderByDescending(ur => ur.UserPoints).ToList();
                 CalculatePointsForWinnersThisRound(round);
             }
