@@ -25,7 +25,7 @@ namespace ServiceTest
                 Id = 1,
                 Name = "Tournament",
                 NumberOfRounds = 14,
-                isDone = false,
+                IsDone = false,
                 Rounds = new List<Round>(),
                 Participants = new List<UserTour>()
             };
@@ -63,7 +63,7 @@ namespace ServiceTest
                 Id = 1,
                 Name = "Tournament",
                 NumberOfRounds = 14,
-                isDone = false,
+                IsDone = false,
                 Rounds = new List<Round>(),
                 Participants = new List<UserTour>()
             };
@@ -260,7 +260,7 @@ namespace ServiceTest
                 Id = 1,
                 NumberOfRounds = 14,
                 Name = "Testuring",
-                isDone = false
+                IsDone = false
             };
             Round round = new Round
             {
