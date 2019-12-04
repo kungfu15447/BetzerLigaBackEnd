@@ -13,5 +13,7 @@ namespace BetzerLiga.Core.Entity
         public int MatchId { get; set; }
         public int HomeTip { get; set; }
         public int GuestTip { get; set; }
+        public int Rating { get; set; }
+        public int TotalPoints { get; set; }
     }
 }

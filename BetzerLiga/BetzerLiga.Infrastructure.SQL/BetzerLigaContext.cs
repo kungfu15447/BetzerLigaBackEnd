@@ -15,10 +15,6 @@ namespace BetzerLiga.Infrastructure.SQL
 
         protected override void OnModelCreating(ModelBuilder ModelBuilder)
         {
-            ModelBuilder.Entity<Round>()
-                .HasMany<Match>(r => r.Matches)
-                .WithOne(m => m.Round)
-                .HasForeignKey(m => m.Id);
 
             ModelBuilder.Entity<Tournament>()
                 .HasMany(t => t.Participants)
@@ -41,7 +37,9 @@ namespace BetzerLiga.Infrastructure.SQL
                 .HasForeignKey(t => t.MatchId);
 
             ModelBuilder.Entity<Match>()
-                .HasOne(m => m.Round);
+                .HasOne(m => m.Round)
+                .WithMany(r => r.Matches)
+                .HasForeignKey(m => m. RoundId);
 
             ModelBuilder.Entity<Round>()
                 .HasMany(r => r.Matches)
@@ -57,6 +55,25 @@ namespace BetzerLiga.Infrastructure.SQL
                 .HasOne(f => f.Follow)
                 .WithMany()
                 .HasForeignKey(f => f.FollowId);
+
+            ModelBuilder.Entity<Round>()
+                .HasOne(r => r.Tournament)
+                .WithMany(t => t.Rounds)
+                .HasForeignKey(r => r.TournamentId);
+
+            ModelBuilder.Entity<Tournament>()
+                .HasMany(t => t.Rounds)
+                .WithOne(r => r.Tournament);
+
+            ModelBuilder.Entity<UserRound>()
+                .HasOne<Round>(ur => ur.Round)
+                .WithMany(r => r.RoundPoints)
+                .HasForeignKey(ur => ur.RoundId);
+
+            ModelBuilder.Entity<UserRound>()
+                .HasOne<User>(ur => ur.User)
+                .WithMany(u => u.RoundPoints)
+                .HasForeignKey(ur => ur.UserId);
         }
 
         public DbSet<Tournament> Tournaments { get; set; }

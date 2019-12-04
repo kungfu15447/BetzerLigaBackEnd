@@ -5,6 +5,7 @@ using System.Text;
 using BetzerLiga.Core.ApplicationService.Implementation.Logic;
 using BetzerLiga.Core.DomainService;
 using BetzerLiga.Core.Entity;
+using System.Linq;
 
 namespace BetzerLiga.Core.ApplicationService.Implementation
 {
@@ -26,7 +27,7 @@ namespace BetzerLiga.Core.ApplicationService.Implementation
 
         public Round ReadById(int id)
         {
-            return _roundRepo.ReadById(id);
+            return _roundVali.SortingByUserPoints(_roundRepo.ReadById(id));
         }
 
         public List<Round> ReadAll()
@@ -43,6 +44,11 @@ namespace BetzerLiga.Core.ApplicationService.Implementation
         public Round Delete(int id)
         {
             return _roundRepo.Delete(id);
+        }
+
+        public Round GetCurrentRoundFromTournament()
+        {
+            return _roundVali.ValidateCurrentRound(_roundRepo.ReadAll());
         }
     }
 }

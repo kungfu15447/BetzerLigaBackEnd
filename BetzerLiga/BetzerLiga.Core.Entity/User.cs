@@ -16,5 +16,6 @@ namespace BetzerLiga.Core.Entity
         public List<UserTour> Tournaments { get; set; }
         public List<UserMatch> Tips { get; set; }
         public List<Follower> Following { get; set; }
+        public List<UserRound> RoundPoints { get; set; }
     }
 }

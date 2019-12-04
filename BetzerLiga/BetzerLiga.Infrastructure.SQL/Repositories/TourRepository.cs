@@ -34,16 +34,24 @@ namespace BetzerLiga.Infrastructure.SQL.Repositories
         {
             return _context.Tournaments
                 .Include(r => r.Rounds)
+                .ThenInclude(r => r.RoundPoints)
+                .Include(r => r.Rounds)
+                .ThenInclude(r => r.Matches)
                 .Include(t => t.Participants)
-                .ThenInclude(p => p.User);
+                .ThenInclude(p => p.User)
+                .ThenInclude(u => u.Tips);
         }
 
         public Tournament ReadTourById(int Id)
         {
             return _context.Tournaments
                 .Include(r => r.Rounds)
+                .ThenInclude(r => r.RoundPoints)
+                .Include(r => r.Rounds)
+                .ThenInclude(r => r.Matches)
                 .Include(t => t.Participants)
                 .ThenInclude(p => p.User)
+                .ThenInclude(u => u.Tips)
                 .FirstOrDefault(t => t.Id == Id);
         }
 

@@ -18,18 +18,21 @@ namespace BetzerLiga.Infrastructure.SQL.Repositories
         }
         public Round Create(Round round)
         {
-            var roundSaved = _ctx.Rounds.Add(round).Entity;
+            _ctx.Attach(round).State = EntityState.Added;
             _ctx.SaveChanges();
-            return roundSaved;
+            return round;
         }
 
         public Round ReadById(int id)
         {
             return _ctx.Rounds
+                .Include(r => r.RoundPoints)
+                .ThenInclude(ur => ur.User)
                 .Include(r=>r.Matches)
                 .ThenInclude(m=>m.Tips)
                 .ThenInclude(um=>um.Match)
                 .Include(r => r.Tournament)
+                .ThenInclude(t => t.Participants)
                 .FirstOrDefault(r => r.Id == id);
         }
 
@@ -40,12 +43,19 @@ namespace BetzerLiga.Infrastructure.SQL.Repositories
                 .ThenInclude(m => m.Tips)
                 .ThenInclude(um => um.Match)
                 .Include(r=>r.Tournament)
+                .ThenInclude(t=>t.Participants)
+                .Include(r => r.RoundPoints)
+                .ThenInclude(ur => ur.User)
                 .ToList();
         }
 
         public Round Update(Round roundUpdated)
         {
-            var newMatches = new List<Match>(roundUpdated.Matches);
+            var newMatches = new List<Match>();
+            if (roundUpdated.Matches != null)
+            {
+                newMatches = roundUpdated.Matches;
+            }
             _ctx.Attach(roundUpdated).State = EntityState.Modified;
             _ctx.Matches.RemoveRange(
                 _ctx.Matches.Where(m=>m.Round.Id== roundUpdated.Id)
@@ -55,7 +65,13 @@ namespace BetzerLiga.Infrastructure.SQL.Repositories
                 _ctx.Entry(match).State = EntityState.Added;
             }
 
+            if (roundUpdated.Matches != null)
+            {
+                _ctx.Entry(roundUpdated).Reference(r => r.Matches).IsModified = true;
+            }
+                
             _ctx.Entry(roundUpdated).Reference(r => r.Matches).IsModified = true;
+
 
             _ctx.SaveChanges();
             return roundUpdated;
