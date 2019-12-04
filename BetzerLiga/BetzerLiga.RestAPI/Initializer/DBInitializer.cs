@@ -160,49 +160,227 @@ namespace BetzerLiga.RestAPI.Initializer
                 TournamentId = 1
             };
 
-            UserRound userRound1 = new UserRound
+            UserRound userRound11 = new UserRound
             {
                 User = user1,
                 UserPoints = 24,
             };
-            UserRound userRound2 = new UserRound
+            UserRound userRound12 = new UserRound
             {
-                User = user2,
+                User = user1,
                 UserPoints = 13,
             };
-            UserRound userRound3 = new UserRound
+            UserRound userRound13 = new UserRound
             {
-                User = user3,
+                User = user1,
                 UserPoints = 56,
             }; 
-            UserRound userRound4 = new UserRound
+            UserRound userRound14 = new UserRound
             {
-                User = user4,
+                User = user1,
                 UserPoints = 76,
             };
-            UserRound userRound5 = new UserRound()
+            UserRound userRound21 = new UserRound()
             {
 
-                User = user1,
+                User = user2,
                 UserPoints =  24
             };
+            UserRound userRound22 = new UserRound()
+            {
 
-            //round1.RoundPoints.Add(userRound1);
-            //round1.RoundPoints.Add(userRound2);
-            //round1.RoundPoints.Add(userRound3);
-            //round1.RoundPoints.Add(userRound4);
-            //round2.RoundPoints.Add(userRound1);
-            //round2.RoundPoints.Add(userRound2);
-            //round2.RoundPoints.Add(userRound3);
-            //round2.RoundPoints.Add(userRound4);
-            //round3.RoundPoints.Add(userRound1);
-            //round3.RoundPoints.Add(userRound2);
-            //round3.RoundPoints.Add(userRound3);
-            //round3.RoundPoints.Add(userRound4);
-            round4.RoundPoints.Add(userRound1);
-            round4.RoundPoints.Add(userRound2);
-            round4.RoundPoints.Add(userRound3);
-            round4.RoundPoints.Add(userRound4);
+                User = user2,
+                UserPoints = 70 
+            };
+            UserRound userRound23 = new UserRound()
+            {
+
+                User = user2,
+                UserPoints = 101
+            };
+            UserRound userRound24 = new UserRound()
+            {
+
+                User = user2,
+                UserPoints = 9
+            };
+            UserRound userRound31 = new UserRound()
+            {
+
+                User = user3,
+                UserPoints = 60
+            };
+            UserRound userRound32 = new UserRound()
+            {
+
+                User = user3,
+                UserPoints = 112
+            };
+            UserRound userRound33 = new UserRound()
+            {
+
+                User = user3,
+                UserPoints = 110
+            };
+            UserRound userRound34 = new UserRound()
+            {
+
+                User = user3,
+                UserPoints = 10
+            };
+            UserRound userRound41 = new UserRound()
+            {
+
+                User = user4,
+                UserPoints = 97
+            };
+            UserRound userRound42 = new UserRound()
+            {
+
+                User = user4,
+                UserPoints = 65
+            };
+            UserRound userRound43 = new UserRound()
+            {
+
+                User = user4,
+                UserPoints = 25
+            };
+            UserRound userRound44 = new UserRound()
+            {
+
+                User = user4,
+                UserPoints = 30
+            };
+        
+        Match match11 = new Match()
+            {
+            HomeTeam = "EFB",
+            HomeScore = 0,
+            GuestTeam = "BIF",
+            GuestScore = 0,
+            StartDate = new DateTime(),
+            RoundId = 1,
+            Tips = new List<UserMatch>()
+            };
+        Match match12 = new Match()
+        {
+            HomeTeam = "FCM",
+            HomeScore = 0,
+            GuestTeam = "FCK",
+            GuestScore = 0,
+            StartDate = new DateTime(),
+            RoundId = 1,
+            Tips = new List<UserMatch>()
+        };
+        Match match13 = new Match()
+        {
+            HomeTeam = "EFB",
+            HomeScore = 0,
+            GuestTeam = "FCM",
+            GuestScore = 0,
+            StartDate = new DateTime(),
+            RoundId = 1,
+            Tips = new List<UserMatch>()
+        };
+        Match match14 = new Match()
+        {
+            HomeTeam = "OB",
+            HomeScore = 0,
+            GuestTeam = "BIF",
+            GuestScore = 0,
+            StartDate = new DateTime(),
+            RoundId = 1,
+            Tips = new List<UserMatch>()
+        };
+        Match match15 = new Match
+        {
+            HomeTeam = "FCK",
+            HomeScore = 0,
+            GuestTeam = "OB",
+            GuestScore = 0,
+            StartDate = new DateTime(),
+            RoundId = 1,
+            Tips = new List<UserMatch>()
+        };
+        Match match21 = new Match
+        {
+            HomeTeam = "AAB",
+            HomeScore = 2,
+            GuestTeam = "OB",
+            GuestScore = 0,
+            StartDate = new DateTime(),
+            RoundId = 1,
+            Tips = new List<UserMatch>()
+        };
+        Match match22 = new Match
+        {
+            HomeTeam = "FCK",
+            HomeScore = 0,
+            GuestTeam = "AGF",
+            GuestScore = 0,
+            StartDate = new DateTime(),
+            RoundId = 1,
+            Tips = new List<UserMatch>()
+        };
+        Match match23 = new Match
+        {
+            HomeTeam = "AGF",
+            HomeScore = 0,
+            GuestTeam = "AAB",
+            GuestScore = 0,
+            StartDate = new DateTime(),
+            RoundId = 1,
+            Tips = new List<UserMatch>()
+        };
+        Match match31 = new Match
+        {
+            HomeTeam = "ACH",
+            HomeScore = 0,
+            GuestTeam = "FCK",
+            GuestScore = 0,
+            StartDate = new DateTime(),
+            RoundId = 1,
+            Tips = new List<UserMatch>()
+        };
+        Match match32 = new Match
+        {
+            HomeTeam = "FCK",
+            HomeScore = 0,
+            GuestTeam = "EFB",
+            GuestScore = 0,
+            StartDate = new DateTime(),
+            RoundId = 1,
+            Tips = new List<UserMatch>()
+        };
+        Match match41 = new Match
+        {
+            HomeTeam = "BIF",
+            HomeScore = 0,
+            GuestTeam = "OB",
+            GuestScore = 0,
+            StartDate = new DateTime(),
+            RoundId = 1,
+            Tips = new List<UserMatch>()
+        };
+
+
+            round1.RoundPoints.Add(userRound11);
+            round1.RoundPoints.Add(userRound21);
+            round1.RoundPoints.Add(userRound31);
+            round1.RoundPoints.Add(userRound42);
+            round2.RoundPoints.Add(userRound12);
+            round2.RoundPoints.Add(userRound22);
+            round2.RoundPoints.Add(userRound32);
+            round2.RoundPoints.Add(userRound42);
+            round3.RoundPoints.Add(userRound13);
+            round3.RoundPoints.Add(userRound23);
+            round3.RoundPoints.Add(userRound33);
+            round3.RoundPoints.Add(userRound43);
+            round4.RoundPoints.Add(userRound14);
+            round4.RoundPoints.Add(userRound24);
+            round4.RoundPoints.Add(userRound34);
+            round4.RoundPoints.Add(userRound44);
 
 
             tour1.Participants.Add(usertour1);
@@ -224,6 +402,17 @@ namespace BetzerLiga.RestAPI.Initializer
             user5 = ctx.Users.Add(user5).Entity;
             user6 = ctx.Users.Add(user6).Entity;
 
+            round1.Matches.Add(match11);
+            round1.Matches.Add(match12);
+            round1.Matches.Add(match13);
+            round1.Matches.Add(match14);
+            round1.Matches.Add(match15);
+            round2.Matches.Add(match21);
+            round2.Matches.Add(match22);
+            round2.Matches.Add(match23);
+            round3.Matches.Add(match31);
+            round3.Matches.Add(match32);
+            round4.Matches.Add(match41);
 
             ctx.Tournaments.Add(tour1);
 
@@ -232,8 +421,11 @@ namespace BetzerLiga.RestAPI.Initializer
             ctx.Rounds.Add(round3);
             ctx.Rounds.Add(round4);
 
-            
-
+            ctx.Matches.Add(match11);
+            ctx.Matches.Add(match12);
+            ctx.Matches.Add(match13);
+            ctx.Matches.Add(match14);
+            ctx.Matches.Add(match15);
 
             ctx.SaveChanges();
             

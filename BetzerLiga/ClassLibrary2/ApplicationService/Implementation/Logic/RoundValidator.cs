@@ -42,11 +42,16 @@ namespace BetzerLiga.Core.ApplicationService.Implementation.Logic
                 }
             }
             Round realRound = listSorted.FirstOrDefault(r => r.RoundNumber == currentRound);
-            var sortedByUserpoints = realRound.RoundPoints.OrderByDescending(ur => ur.UserPoints);
-            realRound.RoundPoints = new List<UserRound>();
-            realRound.RoundPoints.AddRange(sortedByUserpoints);
-            return realRound;
+            Round roundToSend = SortingByUserPoints(realRound);
+            return roundToSend;
+        }
 
+        public Round SortingByUserPoints(Round round)
+        {
+            var sortedListByDescending = round.RoundPoints.OrderByDescending(ur => ur.UserPoints);
+            round.RoundPoints = new List<UserRound>();
+            round.RoundPoints.AddRange(sortedListByDescending);
+            return round;
         }
     }
 }

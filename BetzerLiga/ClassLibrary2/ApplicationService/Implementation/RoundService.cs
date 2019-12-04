@@ -27,7 +27,7 @@ namespace BetzerLiga.Core.ApplicationService.Implementation
 
         public Round ReadById(int id)
         {
-            return _roundRepo.ReadById(id);
+            return _roundVali.SortingByUserPoints(_roundRepo.ReadById(id));
         }
 
         public List<Round> ReadAll()
