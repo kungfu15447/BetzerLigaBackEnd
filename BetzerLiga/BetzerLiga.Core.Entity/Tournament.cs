@@ -11,6 +11,7 @@ namespace BetzerLiga.Core.Entity
         public int NumberOfRounds { get; set; }
         public bool IsDone { get; set; }
         public DateTime StartDate { get; set; }
+        public DateTime EndDate { get; set; }
         public List<Round> Rounds { get; set; }
         public List<UserTour> Participants { get; set; }
     }
