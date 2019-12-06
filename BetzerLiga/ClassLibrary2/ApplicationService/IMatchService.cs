@@ -12,5 +12,6 @@ namespace BetzerLiga.Core.ApplicationService
         Match UpdateMatch(Match match);
         List<Match> GetAllMatches();
         Match GetMatchById(int id);
+        List<Match> GetMatchesByCurrentRoundAndByUserId(User user);
     }
 }
