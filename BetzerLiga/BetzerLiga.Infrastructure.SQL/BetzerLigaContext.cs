@@ -42,9 +42,28 @@ namespace BetzerLiga.Infrastructure.SQL
                 .HasForeignKey(m => m. RoundId);
 
             ModelBuilder.Entity<Round>()
+                .HasMany(r => r.Matches)
+                .WithOne(m => m.Round);
+
+            ModelBuilder.Entity<Follower>()
+                .HasOne(f => f.AuthorizedUser)
+                .WithMany()
+                .HasForeignKey(f => f.AuthorizedUserId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            ModelBuilder.Entity<Follower>()
+                .HasOne(f => f.Follow)
+                .WithMany()
+                .HasForeignKey(f => f.FollowId);
+
+            ModelBuilder.Entity<Round>()
                 .HasOne(r => r.Tournament)
                 .WithMany(t => t.Rounds)
                 .HasForeignKey(r => r.TournamentId);
+
+            ModelBuilder.Entity<Tournament>()
+                .HasMany(t => t.Rounds)
+                .WithOne(r => r.Tournament);
 
             ModelBuilder.Entity<UserRound>()
                 .HasOne<Round>(ur => ur.Round)
@@ -61,5 +80,6 @@ namespace BetzerLiga.Infrastructure.SQL
         public DbSet<User> Users { get; set; }
         public DbSet<Match> Matches { get; set; }
         public DbSet<Round> Rounds { get; set; }
+        public DbSet<Follower> Following { get; set; }
     }
 }

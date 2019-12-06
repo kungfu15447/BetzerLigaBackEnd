@@ -37,13 +37,15 @@ namespace BetzerLiga.Infrastructure.SQL.Repositories
 
         public IEnumerable<User> GetAll()
         {
-            return _context.Users
+            return _context.Users.Include(u => u.Following)
+                .AsNoTracking()
                 .OrderBy(u => u.Id);
         }
 
         public User GetUserById(int id)
         {
-            return _context.Users
+            return _context.Users.Include(u => u.Following)
+                .AsNoTracking()
                 .FirstOrDefault(u => u.Id == id);
         }
 
@@ -58,20 +60,17 @@ namespace BetzerLiga.Infrastructure.SQL.Repositories
             {
                 _context.Entry(um).State = EntityState.Added;
             }
+
+            var userFollower = new List<Follower>(UserToUpdate.Following ?? new List<Follower>());
+            _context.Following.RemoveRange(
+                _context.Following.Where(f => f.AuthorizedUserId == UserToUpdate.Id)
+                );
+            foreach (var uf in userFollower)
+            {
+                _context.Entry(uf).State = EntityState.Added;
+            }
             _context.SaveChanges();
             return UserToUpdate;
-        }
-
-        /*
-         * Adds another user to the logged in users following list. 
-         */
-        public void AddFollower(int id, User userFollowing)
-        {
-            User user = GetUserById(id);
-            if(user.Id != userFollowing.Id || user.Id >= 1)
-            {
-                userFollowing.Following.Add(user);
-            }
         }
     }
 }

@@ -72,7 +72,7 @@ namespace BetzerLiga.RestAPI
             services.AddMvc().AddJsonOptions(options =>
             {
                 options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
-                options.SerializerSettings.MaxDepth = 3;
+                options.SerializerSettings.MaxDepth = 5;
             });
 
             //CORS

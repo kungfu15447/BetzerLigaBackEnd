@@ -34,6 +34,7 @@ namespace BetzerLiga.RestAPI.Initializer
                 PasswordHash = passwordHashUser,
                 PasswordSalt = passwordSaltUser,
                 IsAdmin = true,
+                Following = new List<Follower>(),
                 RoundPoints = new List<UserRound>(),
                 Tournaments = new List<UserTour>(),
                 Tips = new List<UserMatch>()
