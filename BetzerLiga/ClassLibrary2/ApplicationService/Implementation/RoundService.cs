@@ -50,5 +50,15 @@ namespace BetzerLiga.Core.ApplicationService.Implementation
         {
             return _roundVali.ValidateCurrentRound(_roundRepo.ReadAll());
         }
+
+        public Round GetMatchesByCurrentRoundAndByUserId(int userId)
+        {
+            Round currentRound = GetCurrentRoundFromTournament();
+            List<Match> matchesInRound = currentRound.Matches;
+            matchesInRound.Select(m => m.Tips.Where(um => um.UserId == userId));
+            currentRound.Matches.Clear();
+            currentRound.Matches.AddRange(matchesInRound);
+            return currentRound;
+        }
     }
 }

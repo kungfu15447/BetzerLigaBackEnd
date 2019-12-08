@@ -21,13 +21,18 @@ namespace BetzerLiga.RestAPI.Controllers
         }
         // GET api/values
         [HttpGet]
-        public ActionResult<List<Round>> Get([FromQuery]string tournament)
+        public ActionResult<List<Round>> Get([FromQuery]string tournament, int userId)
         {
-            try
-                    {
+            try 
+            {
                 if (tournament == "tour")
                 {
                     var list = new List<Round>() { _roundService.GetCurrentRoundFromTournament() };
+                    return Ok(list);
+                }
+                else if((tournament == "matches") && (userId < 1))
+                {
+                    var list = new List<Round>() { _roundService.GetMatchesByCurrentRoundAndByUserId(userId) };
                     return Ok(list);
                 }
                 else
