@@ -93,6 +93,7 @@ namespace BetzerLiga.Infrastructure.SQL
         }
 
         public DbSet<Tournament> Tournaments { get; set; }
+        public DbSet<UserTour> Participants { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Match> Matches { get; set; }
         public DbSet<Round> Rounds { get; set; }
