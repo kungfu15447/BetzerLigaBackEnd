@@ -30,16 +30,8 @@ namespace BetzerLiga.Core.ApplicationService.Implementation
         }
 
         public List<Tournament> GetAllTour()
-        {
-            List<Tournament> tournaments = _tourRepo.ReadAll().ToList();
-            foreach (Tournament tournament in tournaments)
-            {
-                if (!tournament.IsDone)
-                {
-                    _pointCalc.CalculateTournamentPoints(tournament);
-                }
-            }
-            return tournaments;
+        {        
+            return _tourRepo.ReadAll().ToList();
         }
 
         public Tournament GetCurrentOnGoingTournament()
