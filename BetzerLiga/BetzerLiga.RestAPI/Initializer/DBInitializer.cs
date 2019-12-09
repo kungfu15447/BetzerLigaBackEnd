@@ -120,6 +120,7 @@ namespace BetzerLiga.RestAPI.Initializer
                 RoundNumber = 11,
                 Tournament = tour1,
                 TotalGoals = 0,
+                TippingDeadLine = new DateTime(2019, 11, 26),
                 Matches = new List<Match>(),
                 RoundPoints = new List<UserRound>()
             };
