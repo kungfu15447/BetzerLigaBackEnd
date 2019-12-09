@@ -117,7 +117,7 @@ namespace BetzerLiga.RestAPI.Initializer
 
             Round round1 = new Round
             {
-                RoundNumber = 11,
+                RoundNumber = 1,
                 Tournament = tour1,
                 TotalGoals = 0,
                 TippingDeadLine = new DateTime(2019, 11, 26),
