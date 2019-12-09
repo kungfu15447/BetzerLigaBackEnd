@@ -6,7 +6,6 @@ namespace BetzerLiga.Core.Entity
 {
     public class Follower
     {
-        public int Id { get; set; }
         public int AuthorizedUserId { get; set; }
         public virtual User AuthorizedUser { get; set; }
 
