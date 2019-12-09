@@ -213,6 +213,5 @@ namespace BetzerLiga.Core.ApplicationService.Implementation.Logic
         {
             _defaultRoundTier = roundTier;
         }
-
     }
 }
