@@ -43,6 +43,7 @@ namespace BetzerLiga.Infrastructure.SQL.Repositories
                 .ThenInclude(r => r.RoundPoints)
                 .Include(r => r.Rounds)
                 .ThenInclude(r => r.Matches)
+                .ThenInclude(m => m.Tips)
                 .Include(t => t.Participants)
                 .ThenInclude(p => p.User)
                 .FirstOrDefault(t => t.Id == Id);
