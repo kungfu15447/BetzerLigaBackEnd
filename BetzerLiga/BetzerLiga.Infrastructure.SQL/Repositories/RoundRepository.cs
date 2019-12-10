@@ -58,7 +58,7 @@ namespace BetzerLiga.Infrastructure.SQL.Repositories
             }
             _ctx.Attach(roundUpdated).State = EntityState.Modified;
             _ctx.Matches.RemoveRange(
-                _ctx.Matches.Where(m=>m.Round.Id== roundUpdated.Id)
+                _ctx.Matches.Where(m=>m.Round.Id == roundUpdated.Id)
                 );
             foreach (var match in newMatches)
             {
