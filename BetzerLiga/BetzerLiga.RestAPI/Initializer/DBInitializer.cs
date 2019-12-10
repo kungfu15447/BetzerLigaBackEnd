@@ -60,7 +60,7 @@ namespace BetzerLiga.RestAPI.Initializer
                 Email = "FrederikFrederiksen@google.dk",
                 PasswordHash = passwordHashUser,
                 PasswordSalt = passwordSaltUser,
-                IsAdmin = true,
+                IsAdmin = false,
                 RoundPoints = new List<UserRound>(),
                 Tournaments = new List<UserTour>(),
                 Tips = new List<UserMatch>()
