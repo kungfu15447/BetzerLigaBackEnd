@@ -77,13 +77,16 @@ namespace BetzerLiga.Core.ApplicationService.Implementation.Logic
 
             foreach (Match match in round.Matches)
             {
-                UserMatch tips = match.Tips.FirstOrDefault(t => t.UserId == user.Id);
-                tips.TotalPoints = CalculateTips(tips, match);
-                if (tips.TotalPoints > CalculateBonusTierPoints(_defaultRightPoints))
+                if (DateTime.Compare(match.StartDate, DateTime.Now) <= 0)
                 {
-                    correctMatchesGuessed++;
+                    UserMatch tips = match.Tips.FirstOrDefault(t => t.UserId == user.Id);
+                    tips.TotalPoints = CalculateTips(tips, match);
+                    if (tips.TotalPoints > CalculateBonusTierPoints(_defaultRightPoints))
+                    {
+                        correctMatchesGuessed++;
+                    }
+                    totalRoundPoints += tips.TotalPoints;
                 }
-                totalRoundPoints += tips.TotalPoints;
             }
 
             totalRoundPoints += CalculatePointsForTotalMatchesCorrect(correctMatchesGuessed);
@@ -213,6 +216,5 @@ namespace BetzerLiga.Core.ApplicationService.Implementation.Logic
         {
             _defaultRoundTier = roundTier;
         }
-
     }
 }

@@ -52,6 +52,23 @@ namespace BetzerLiga.Infrastructure.SQL.Repositories
         public Tournament UpdateTour(Tournament Tour)
         {
             _context.Attach(Tour).State = EntityState.Modified;
+
+            var userTours = new List<UserTour>(Tour.Participants ?? new List<UserTour>());
+            _context.Participants.RemoveRange(
+                _context.Participants.Where(p => p.TournamentId == Tour.Id)
+                );
+            foreach (var ut in userTours)
+            {
+                _context.Entry(ut).State = EntityState.Added;
+            }
+            /*var userFollower = new List<Follower>(UserToUpdate.Following ?? new List<Follower>());
+            _context.Following.RemoveRange(
+                _context.Following.Where(f => f.AuthorizedUserId == UserToUpdate.Id)
+                );
+            foreach (var uf in userFollower)
+            {
+                _context.Entry(uf).State = EntityState.Added;
+            }*/
             _context.SaveChanges();
             return Tour;
         }

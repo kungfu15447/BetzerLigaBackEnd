@@ -47,7 +47,7 @@ namespace BetzerLiga.Core.ApplicationService.Implementation
         public Tournament GetTourById(int id)
         {
             Tournament tournament = _tourRepo.ReadTourById(id);
-            if (!tournament.IsDone)
+            if (!tournament.IsDone || DateTime.Compare(tournament.StartDate, DateTime.Now) <= 0)
             {
                 _pointCalc.CalculateTournamentPoints(tournament);
                 tournament.Participants.OrderByDescending(ut => ut.TotalUserPoints);
@@ -57,6 +57,10 @@ namespace BetzerLiga.Core.ApplicationService.Implementation
 
         public Tournament UpdateTournament(Tournament Tour)
         {
+            if (DateTime.Compare(Tour.EndDate, DateTime.Now) == -1)
+            {
+                Tour.IsDone = true;
+            }
             return _tourRepo.UpdateTour(Tour);
         }
     }
