@@ -48,7 +48,7 @@ namespace BetzerLiga.Core.ApplicationService.Implementation
 
         public Round GetCurrentRoundFromTournament()
         {
-            return _roundVali.ValidateCurrentRound(_roundRepo.ReadAll());
+            throw new NotImplementedException();
         }
     }
 }
