@@ -51,7 +51,8 @@ namespace BetzerLiga.Infrastructure.SQL.Repositories
 
         public User Update(User UserToUpdate)
         {
-            if(UserToUpdate != null)
+            var userFollower = new List<Follower>(UserToUpdate.Following ?? new List<Follower>());
+            if (UserToUpdate != null)
             {
                 _context.Attach(UserToUpdate).State = EntityState.Modified;
             }
@@ -61,10 +62,14 @@ namespace BetzerLiga.Infrastructure.SQL.Repositories
                 _context.Entry(um).State = EntityState.Added;
             }
 
-            var userFollower = new List<Follower>(UserToUpdate.Following ?? new List<Follower>());
-            _context.Following.RemoveRange(
-                _context.Following.Where(f => f.AuthorizedUserId == UserToUpdate.Id)
-                );
+            var followers = _context.Following.Where(f => f.AuthorizedUser.Id == UserToUpdate.Id);
+            foreach (var item in followers)
+            {
+                _context.Remove(item);
+            }
+            //Der er to kald til databasen, fordi det første kald fixer en entity framework bug med unique constraint.
+            _context.SaveChanges();
+
             foreach (var uf in userFollower)
             {
                 _context.Entry(uf).State = EntityState.Added;

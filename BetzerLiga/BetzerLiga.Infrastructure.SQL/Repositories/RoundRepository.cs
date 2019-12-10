@@ -51,14 +51,18 @@ namespace BetzerLiga.Infrastructure.SQL.Repositories
 
         public Round Update(Round roundUpdated)
         {
-            var newMatches = new List<Match>();
+            /*var newMatches = new List<Match>();
             if (roundUpdated.Matches != null)
             {
                 newMatches = roundUpdated.Matches;
             }
+
             _ctx.Attach(roundUpdated).State = EntityState.Modified;
             _ctx.Matches.RemoveRange(
                 _ctx.Matches.Where(m=>m.Round.Id == roundUpdated.Id)
+
+            /*_ctx.Matches.RemoveRange(
+                _ctx.Matches.Where(m=>m.Round.Id== roundUpdated.Id)
                 );
             foreach (var match in newMatches)
             {
@@ -70,10 +74,19 @@ namespace BetzerLiga.Infrastructure.SQL.Repositories
                 _ctx.Entry(roundUpdated).Reference(r => r.Matches).IsModified = true;
             }
                 
-            _ctx.Entry(roundUpdated).Reference(r => r.Matches).IsModified = true;
+            _ctx.Entry(roundUpdated).Reference(r => r.Matches).IsModified = true;*/
 
+            var userRounds = new List<UserRound>(roundUpdated.RoundPoints ?? new List<UserRound>());
+            _ctx.RoundPoints.RemoveRange(
+                _ctx.RoundPoints.Where(r => r.RoundId == roundUpdated.Id)
+                );
+            foreach (var ur in userRounds)
+            {
+                _ctx.Entry(ur).State = EntityState.Added;
+            }
 
             _ctx.SaveChanges();
+
             return roundUpdated;
         }
 

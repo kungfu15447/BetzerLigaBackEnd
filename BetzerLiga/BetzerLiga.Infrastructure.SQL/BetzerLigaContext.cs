@@ -46,16 +46,32 @@ namespace BetzerLiga.Infrastructure.SQL
                 .WithOne(m => m.Round);
 
             ModelBuilder.Entity<Follower>()
-                .HasOne(f => f.AuthorizedUser)
+               .HasKey(f => new { f.FollowId, f.AuthorizedUserId });
+
+            ModelBuilder.Entity<Follower>()
+                .HasOne(pt => pt.Follow)
                 .WithMany()
+                .HasForeignKey(pt => pt.FollowId);
+
+            ModelBuilder.Entity<Follower>()
+                .HasOne(pt => pt.AuthorizedUser)
+                .WithMany(t => t.Following)
+                .HasForeignKey(pt => pt.AuthorizedUserId);
+            /*
+            ModelBuilder.Entity<Follower>()
+                .HasKey(f => new {f.FollowId, f.AuthorizedUserId});
+
+            ModelBuilder.Entity<Follower>()
+                .HasOne(f => f.AuthorizedUser)
+                .WithMany(u => u.Following)
                 .HasForeignKey(f => f.AuthorizedUserId)
                 .OnDelete(DeleteBehavior.Restrict);
 
             ModelBuilder.Entity<Follower>()
                 .HasOne(f => f.Follow)
-                .WithMany()
+                .WithMany(fo => fo.Following)
                 .HasForeignKey(f => f.FollowId);
-
+                */
             ModelBuilder.Entity<Round>()
                 .HasOne(r => r.Tournament)
                 .WithMany(t => t.Rounds)
@@ -77,6 +93,8 @@ namespace BetzerLiga.Infrastructure.SQL
         }
 
         public DbSet<Tournament> Tournaments { get; set; }
+        public DbSet<UserTour> Participants { get; set; }
+        public DbSet<UserRound> RoundPoints { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Match> Matches { get; set; }
         public DbSet<Round> Rounds { get; set; }

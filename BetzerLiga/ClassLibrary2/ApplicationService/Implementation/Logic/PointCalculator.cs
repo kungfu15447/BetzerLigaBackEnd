@@ -64,8 +64,12 @@ namespace BetzerLiga.Core.ApplicationService.Implementation.Logic
             {
                 foreach(Round round in tournament.Rounds)
                 {
-                    user.TotalUserPoints = 0;
-                    user.TotalUserPoints += round.RoundPoints.FirstOrDefault(r => r.UserId == user.UserId).UserPoints;
+                    UserRound currentUser = round.RoundPoints.FirstOrDefault(r => r.UserId == user.UserId);
+                    if(currentUser != null)
+                    {
+                        user.TotalUserPoints = 0;
+                        user.TotalUserPoints += round.RoundPoints.FirstOrDefault(r => r.UserId == user.UserId).UserPoints;
+                    } 
                 } 
             }
         }
@@ -77,13 +81,19 @@ namespace BetzerLiga.Core.ApplicationService.Implementation.Logic
 
             foreach (Match match in round.Matches)
             {
-                UserMatch tips = match.Tips.FirstOrDefault(t => t.UserId == user.Id);
-                tips.TotalPoints = CalculateTips(tips, match);
-                if (tips.TotalPoints > CalculateBonusTierPoints(_defaultRightPoints))
+                if (DateTime.Compare(match.StartDate, DateTime.Now) <= 0)
                 {
-                    correctMatchesGuessed++;
+                    UserMatch tips = match.Tips.FirstOrDefault(t => t.UserId == user.Id);
+                    if (tips != null)
+                    {
+                        tips.TotalPoints = CalculateTips(tips, match);
+                        if (tips.TotalPoints > CalculateBonusTierPoints(_defaultRightPoints))
+                        {
+                            correctMatchesGuessed++;
+                        }
+                        totalRoundPoints += tips.TotalPoints;
+                    }
                 }
-                totalRoundPoints += tips.TotalPoints;
             }
 
             totalRoundPoints += CalculatePointsForTotalMatchesCorrect(correctMatchesGuessed);
@@ -204,7 +214,10 @@ namespace BetzerLiga.Core.ApplicationService.Implementation.Logic
             foreach(Match match in round.Matches)
             {
                 UserMatch tips = match.Tips.FirstOrDefault(t => t.UserId == user.Id);
-                totalGoals += (tips.GuestTip + tips.HomeTip);
+                if (tips != null)
+                {
+                    totalGoals += (tips.GuestTip + tips.HomeTip);
+                }
             }
             return totalGoals;
         }
@@ -213,6 +226,5 @@ namespace BetzerLiga.Core.ApplicationService.Implementation.Logic
         {
             _defaultRoundTier = roundTier;
         }
-
     }
 }

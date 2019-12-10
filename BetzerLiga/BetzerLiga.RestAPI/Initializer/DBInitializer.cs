@@ -109,15 +109,18 @@ namespace BetzerLiga.RestAPI.Initializer
                 Name = "TournaTest",
                 NumberOfRounds = 12,
                 IsDone = false,
+                StartDate = new DateTime(2019, 12, 4),
+                EndDate = new DateTime(2019, 12, 24),
                 Rounds = new List<Round>(),
                 Participants = new List<UserTour>()
             };
 
             Round round1 = new Round
             {
-                RoundNumber = 11,
+                RoundNumber = 1,
                 Tournament = tour1,
                 TotalGoals = 0,
+                TippingDeadLine = new DateTime(2019, 11, 26),
                 Matches = new List<Match>(),
                 RoundPoints = new List<UserRound>()
             };
