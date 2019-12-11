@@ -14,7 +14,7 @@ namespace BetzerLiga.Core.ApplicationService.Implementation
         {
             _matchRepo = matchRepo;
         }
-        public List<Match> CreateMatch(List<Match> matches)
+        public IEnumerable<Match> CreateMatch(List<Match> matches)
         {
             return _matchRepo.CreateMatch(matches);
         }

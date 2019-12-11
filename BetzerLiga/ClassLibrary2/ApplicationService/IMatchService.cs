@@ -7,7 +7,7 @@ namespace BetzerLiga.Core.ApplicationService
 {
     public interface IMatchService
     {
-        List<Match> CreateMatch(List<Match> matches);
+        IEnumerable<Match> CreateMatch(List<Match> matches);
         Match DeleteMatch(Match match);
         Match UpdateMatch(Match match);
         List<Match> GetAllMatches();

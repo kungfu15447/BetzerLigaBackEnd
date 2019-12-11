@@ -36,7 +36,7 @@ namespace BetzerLiga.RestAPI.Controllers
 
         // POST api/pet
         [HttpPost]
-        public ActionResult<List<Match>> Post([FromBody] List<Match> matches)
+        public ActionResult<IEnumerable<Match>> Post([FromBody] List<Match> matches)
         {
             return Ok(_matchService.CreateMatch(matches));
         }
