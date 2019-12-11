@@ -40,8 +40,15 @@ namespace BetzerLiga.RestAPI.Controllers
         [HttpGet("{id}")]
         public ActionResult<User> Get(int id)
         {
-            if (id < 1) return BadRequest("Id must be greater than 1");
-            return Ok(_userServ.GetUserById(id));
+            try
+            {
+                if (id < 1) return BadRequest("Id must be greater than 1");
+                return Ok(_userServ.GetUserById(id));
+            }catch(Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            
         }
 
         // POST api/users
@@ -49,20 +56,32 @@ namespace BetzerLiga.RestAPI.Controllers
         [HttpPost]
         public ActionResult<User> Post([FromBody] User user)
         {
-            return Ok(_userServ.Add(user));
+            try
+            {
+                return Ok(_userServ.Add(user));
+            }catch(Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            
         }
 
         // PUT api/users/5
         [HttpPut("{id}")]
         public ActionResult<User> Put(int id, [FromBody] User user)
         {
-            if (id < 1 || id != user.Id)
+            try
             {
-                return BadRequest("Parameter id and user id must be the same");
+                if (id < 1 || id != user.Id)
+                {
+                    return BadRequest("Parameter id and user id must be the same");
+                }
+                return Ok(_userServ.Update(user));
+            }catch(Exception ex)
+            {
+                return BadRequest(ex.Message);
             }
-            User testUser = _userServ.Update(user);
             
-            return Ok();
         }
 
         // DELETE api/users/5
