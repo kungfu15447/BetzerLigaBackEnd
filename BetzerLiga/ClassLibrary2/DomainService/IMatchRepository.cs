@@ -10,7 +10,7 @@ namespace BetzerLiga.Core.DomainService
         Match ReadMatchById (int Id);
         IEnumerable<Match> ReadAll();
         Match UpdateMatch(Match Match);
-        Match CreateMatch(Match Match);
+        List<Match> CreateMatch(List<Match> Matches);
         Match DeleteMatch(Match Match);
     }
 }
