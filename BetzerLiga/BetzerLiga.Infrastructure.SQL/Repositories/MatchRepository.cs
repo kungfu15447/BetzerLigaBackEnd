@@ -38,6 +38,27 @@ namespace BetzerLiga.Infrastructure.SQL.Repositories
                 .ThenInclude(t => t.User);
         }
 
+        public IEnumerable<Match> ReadMatchCurrentRound(int userId)
+        {
+            var lastRound = _context.Rounds.Max(x => x.Id);
+            var tipsFound = _context.Matches
+                .Where(m => m.Tips.Exists(um => um.UserId == userId && um.Match.Round.Id == lastRound))
+                .Include(m => m.Tips)
+                .Select(m => new Match
+                {
+                    Id = m.Id,
+                    Round = m.Round,
+                    GuestScore = m.GuestScore,
+                    GuestTeam = m.GuestTeam,
+                    HomeScore = m.HomeScore,
+                    HomeTeam = m.HomeTeam,
+                    RoundId = m.RoundId,
+                    StartDate = m.StartDate,
+                    Tips = m.Tips.Where(t => t.UserId == userId).ToList()
+                });
+            return tipsFound;
+        }
+
         public Match ReadMatchById(int Id)
         {
             return _context.Matches

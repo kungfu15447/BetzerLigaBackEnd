@@ -446,9 +446,9 @@ namespace BetzerLiga.RestAPI.Initializer
             round4.RoundPoints.Add(userRound4);*/
             Match match1 = new Match()
             {
-                HomeTeam = "Home",
+                HomeTeam = "BIF",
                 HomeScore = 3,
-                GuestTeam = "Guest",
+                GuestTeam = "FCK",
                 GuestScore = 1,
                 StartDate = new DateTime(2019, 11, 27),
                 Round = round1,
@@ -457,9 +457,9 @@ namespace BetzerLiga.RestAPI.Initializer
             };
             Match match2 = new Match()
             {
-                HomeTeam = "Home",
+                HomeTeam = "OB",
                 HomeScore = 1,
-                GuestTeam = "Guest",
+                GuestTeam = "FCK",
                 GuestScore = 2,
                 StartDate = new DateTime(2019, 11, 27),
                 Round = round1,
@@ -468,9 +468,9 @@ namespace BetzerLiga.RestAPI.Initializer
             };
             Match match3 = new Match()
             {
-                HomeTeam = "Home",
+                HomeTeam = "FCM",
                 HomeScore = 2,
-                GuestTeam = "Guest",
+                GuestTeam = "FCK",
                 GuestScore = 2,
                 StartDate = new DateTime(2019, 11, 27),
                 Round = round1,

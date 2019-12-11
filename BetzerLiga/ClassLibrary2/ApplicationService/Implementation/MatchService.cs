@@ -10,9 +10,12 @@ namespace BetzerLiga.Core.ApplicationService.Implementation
     public class MatchService : IMatchService
     {
         private IMatchRepository _matchRepo;
-        public MatchService(IMatchRepository matchRepo)
+        private RoundService _roundService;
+
+        public MatchService(IMatchRepository matchRepo, RoundService roundService)
         {
             _matchRepo = matchRepo;
+            _roundService = roundService;
         }
         public Match CreateMatch(Match match)
         {
@@ -34,9 +37,19 @@ namespace BetzerLiga.Core.ApplicationService.Implementation
             return _matchRepo.ReadMatchById(id);
         }
 
+        public List<Match> GetMatchesByCurrentRoundAndByUserId(User user)
+        {
+            var currentRound = _roundService.GetCurrentRoundFromTournament();
+            var matches = currentRound.Matches.FindAll(m => m.Tips.Equals(user.Tips));
+            return matches;
+        }
+
+
         public Match UpdateMatch(Match match)
         {
             return _matchRepo.UpdateMatch(match);
         }
+
+        
     }
 }

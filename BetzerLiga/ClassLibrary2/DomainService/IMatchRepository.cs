@@ -9,6 +9,7 @@ namespace BetzerLiga.Core.DomainService
     {
         Match ReadMatchById (int Id);
         IEnumerable<Match> ReadAll();
+        IEnumerable<Match> ReadMatchCurrentRound(int userId);
         Match UpdateMatch(Match Match);
         Match CreateMatch(Match Match);
         Match DeleteMatch(Match Match);

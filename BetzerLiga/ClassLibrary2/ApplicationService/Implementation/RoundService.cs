@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.IO;
 using System.Text;
 using BetzerLiga.Core.ApplicationService.Implementation.Logic;
@@ -9,14 +11,17 @@ using System.Linq;
 
 namespace BetzerLiga.Core.ApplicationService.Implementation
 {
-    public class RoundService:IRoundService
+    public class RoundService: IRoundService
     {
         private IRoundRepository _roundRepo;
+        private IMatchRepository _matchRepo;
         private RoundValidator _roundVali;
 
-        public RoundService(IRoundRepository roundRepo)
+        public RoundService(IRoundRepository roundRepo,
+            IMatchRepository matchRepo)
         {
             _roundRepo = roundRepo;
+            _matchRepo = matchRepo;
             _roundVali = new RoundValidator();
         }
         public Round Create(Round round)
@@ -49,6 +54,32 @@ namespace BetzerLiga.Core.ApplicationService.Implementation
         public Round GetCurrentRoundFromTournament()
         {
             throw new NotImplementedException();
+        }
+
+        public Round GetMatchesByCurrentRoundAndByUserId(int userId)
+        {
+            /*List<UserMatch> sortedList = new List<UserMatch>();
+            Round currentRound = GetCurrentRoundFromTournament();
+            List<Match> matchesInRound = currentRound.Matches;
+            foreach (var match in matchesInRound)
+            {
+                foreach (var tips in match.Tips)
+                {
+                    if (tips.UserId == userId)
+                    {
+                        sortedList.Add(tips);
+                    }
+                }
+                
+            }
+            currentRound.Matches.Clear();
+            currentRound.Matches.AddRange(sortedList.Select(um=>um.Match));*/
+            var matches = _matchRepo.ReadMatchCurrentRound(userId).ToList();
+            var round = new Round
+            {
+                Matches = matches
+            };
+            return round;
         }
     }
 }
