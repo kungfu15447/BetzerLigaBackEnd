@@ -13,5 +13,6 @@ namespace BetzerLiga.Core.ApplicationService
         Round Update(Round roundUpdated);
         Round Delete(int id);
         Round GetCurrentRoundFromTournament();
+        Round GetMatchesByCurrentRoundAndByUserId(int userId);
     }
 }

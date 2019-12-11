@@ -99,5 +99,6 @@ namespace BetzerLiga.Infrastructure.SQL
         public DbSet<Match> Matches { get; set; }
         public DbSet<Round> Rounds { get; set; }
         public DbSet<Follower> Following { get; set; }
+        public DbSet<UserMatch> UserMatches { get; set; }
     }
 }

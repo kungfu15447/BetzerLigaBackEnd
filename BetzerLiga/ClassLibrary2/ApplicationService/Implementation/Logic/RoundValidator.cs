@@ -22,30 +22,6 @@ namespace BetzerLiga.Core.ApplicationService.Implementation.Logic
             return round;
         }
 
-        public Round ValidateCurrentRound(List<Round> roundList)
-        {
-            int currentRound = 0;
-            List<Round> listSorted = new List<Round>();
-            foreach (var round in roundList)
-            {
-                if (!round.Tournament.IsDone)
-                {
-                    listSorted.Add(round);
-                }
-            }
-
-            foreach (var round in listSorted)
-            {
-                if (round.RoundNumber > currentRound)
-                {
-                    currentRound = round.RoundNumber;
-                }
-            }
-            Round realRound = listSorted.FirstOrDefault(r => r.RoundNumber == currentRound);
-            Round roundToSend = SortingByUserPoints(realRound);
-            return roundToSend;
-        }
-
         public Round SortingByUserPoints(Round round)
         {
             var sortedListByDescending = round.RoundPoints.OrderByDescending(ur => ur.UserPoints);
