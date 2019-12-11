@@ -15,7 +15,7 @@ namespace ServiceTest.ApplicationService.Implementation.Logic
         [Theory]
         [InlineData(-1)]
         [InlineData(-10)]
-        private void TestExceptionThrownWhenRoundNumberIsLessThanOne(int roundNumber)
+        public void TestExceptionThrownWhenRoundNumberIsLessThanOne(int roundNumber)
         { 
             RoundValidator rv = new RoundValidator();
             var round = new Round
