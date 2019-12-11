@@ -21,27 +21,34 @@ namespace BetzerLiga.RestAPI.Controllers
         }
 
         [HttpGet]
-        public ActionResult<List<Tournament>> Get([FromQuery] string tournament)
+        public ActionResult<List<Tournament>> Get()
         {
-            if (tournament.Equals("currentTournament"))
-            {
-                List<Tournament> list = new List<Tournament>() { _tourService.GetCurrentOnGoingTournament() };
-                return Ok(list);
-            }
             return Ok(_tourService.GetAllTour());
         }
 
         [HttpGet("{id}")]
         public ActionResult<Tournament> Get(int id)
         {
-            return Ok(_tourService.GetTourById(id));
+            try
+            {
+                return Ok(_tourService.GetTourById(id));
+            }catch(Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         // POST api/pet
         [HttpPost]
         public ActionResult<Tournament> Post([FromBody] Tournament tournament)
         {
-            return Ok(_tourService.CreateTournament(tournament));
+            try 
+            {
+                return Ok(_tourService.CreateTournament(tournament));
+            }catch(Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         // PUT api/pet/5
@@ -50,7 +57,13 @@ namespace BetzerLiga.RestAPI.Controllers
         {
             if (id == tournament.Id)
             {
-                return Ok(_tourService.UpdateTournament(tournament));
+                try
+                {
+                    return Ok(_tourService.UpdateTournament(tournament));
+                }catch(Exception ex)
+                {
+                    return BadRequest(ex.Message);
+                }    
             }
             else
             {

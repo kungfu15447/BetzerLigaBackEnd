@@ -21,7 +21,16 @@ namespace BetzerLiga.Core.ApplicationService.Implementation
         }
         public Tournament CreateTournament(Tournament Tour)
         {
-            return _tourRepo.CreateTour(Tour);
+            try
+            {
+                _tourVali.CheckIfTournamentIsNull(Tour);
+                _tourVali.ValidateDatesIsNotBeforeTodayOnCreatedTournament(Tour);
+                return _tourRepo.CreateTour(_tourVali.ValidateTournament(Tour));
+            }catch(Exception ex)
+            {
+                throw ex;
+            }
+            
         }
 
         public Tournament DeleteTournament(Tournament Tour)
@@ -34,34 +43,39 @@ namespace BetzerLiga.Core.ApplicationService.Implementation
             return _tourRepo.ReadAll().ToList();
         }
 
-        public Tournament GetCurrentOnGoingTournament()
-        {
-            Tournament onGoingTournament = _tourVali.GetOnGoingTournament(_tourRepo.ReadAll().ToList());
-            if (onGoingTournament != null)
-            {
-                _pointCalc.CalculateTournamentPoints(onGoingTournament);
-            }
-            return onGoingTournament;
-        }
-
         public Tournament GetTourById(int id)
         {
-            Tournament tournament = _tourRepo.ReadTourById(id);
-            if (!tournament.IsDone || DateTime.Compare(tournament.StartDate, DateTime.Now) <= 0)
+            try
             {
-                _pointCalc.CalculateTournamentPoints(tournament);
-                tournament.Participants.OrderByDescending(ut => ut.TotalUserPoints);
+                Tournament tournament = _tourRepo.ReadTourById(id);
+                _tourVali.CheckIfTournamentIsNull(tournament);
+                if (!tournament.IsDone || DateTime.Compare(tournament.StartDate, DateTime.Now) <= 0)
+                {
+                    _pointCalc.CalculateTournamentPoints(tournament);
+                    tournament.Participants.OrderByDescending(ut => ut.TotalUserPoints);
+                }
+                return tournament;
+            }catch(Exception ex)
+            {
+                throw ex;
             }
-            return tournament;
+            
         }
 
         public Tournament UpdateTournament(Tournament Tour)
         {
-            if (DateTime.Compare(Tour.EndDate, DateTime.Now) == -1)
+            try
             {
-                Tour.IsDone = true;
-            }
-            return _tourRepo.UpdateTour(Tour);
+                _tourVali.ValidateTournament(Tour);
+                if (DateTime.Compare(Tour.EndDate, DateTime.Now) == -1)
+                {
+                    Tour.IsDone = true;
+                }
+                return _tourRepo.UpdateTour(Tour);
+            }catch(Exception ex)
+            {
+                throw ex;
+            }    
         }
     }
 }
