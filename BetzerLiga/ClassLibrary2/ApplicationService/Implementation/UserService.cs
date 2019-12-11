@@ -23,7 +23,7 @@ namespace BetzerLiga.Core.ApplicationService.Implementation
             {
                 _userVali.CheckIfUserIsNull(user);
                 User validatedUser = _userVali.ValidateUser(user);
-                return _userRep.Add(user);
+                return _userRep.Add(validatedUser);
             }catch(Exception ex)
             {
                 throw ex;
