@@ -16,11 +16,14 @@ namespace BetzerLiga.Infrastructure.SQL.Repositories
         {
             _context = context;
         }
-        public Match CreateMatch(Match Match)
+        public IEnumerable<Match> CreateMatch(List<Match> matches)
         {
-            _context.Attach(Match).State = EntityState.Added;
+            foreach (var item in matches)
+            {
+                _context.Matches.Add(item);
+            }
             _context.SaveChanges();
-            return Match;
+            return matches;
         }
 
         public Match DeleteMatch(Match Match)

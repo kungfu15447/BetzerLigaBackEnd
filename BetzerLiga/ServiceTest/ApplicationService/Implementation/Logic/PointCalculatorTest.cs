@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Text;
 using Xunit;
 
-namespace ServiceTest
+namespace ServiceTest.ApplicationService.Implementation.Logic
 {
     public class PointCalculatorTest
     {

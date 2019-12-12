@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using BetzerLiga.Core.ApplicationService;
 using BetzerLiga.Core.Entity;
+using BetzerLiga.Infrastructure.SQL;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -14,9 +15,11 @@ namespace BetzerLiga.RestAPI.Controllers
     public class MatchesController : ControllerBase
     {
         private IMatchService _matchService;
-        public MatchesController(IMatchService matchService)
+        private BetzerLigaContext _context;
+        public MatchesController(IMatchService matchService, BetzerLigaContext context)
         {
             _matchService = matchService;
+            _context = context;
         }
 
         [HttpGet]
@@ -33,9 +36,9 @@ namespace BetzerLiga.RestAPI.Controllers
 
         // POST api/pet
         [HttpPost]
-        public ActionResult<Tournament> Post([FromBody] Match match)
+        public ActionResult<IEnumerable<Match>> Post([FromBody] List<Match> matches)
         {
-            return Ok(_matchService.CreateMatch(match));
+            return Ok(_matchService.CreateMatch(matches));
         }
 
         // PUT api/pet/5

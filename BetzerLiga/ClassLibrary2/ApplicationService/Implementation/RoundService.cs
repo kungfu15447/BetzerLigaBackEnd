@@ -11,7 +11,7 @@ using System.Linq;
 
 namespace BetzerLiga.Core.ApplicationService.Implementation
 {
-    public class RoundService:IRoundService
+    public class RoundService: IRoundService
     {
         private IRoundRepository _roundRepo;
         private IMatchRepository _matchRepo;

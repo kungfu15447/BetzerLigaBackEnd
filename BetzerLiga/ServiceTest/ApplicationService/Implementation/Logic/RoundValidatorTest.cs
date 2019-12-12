@@ -8,14 +8,14 @@ using BetzerLiga.Core.ApplicationService.Implementation.Logic;
 using BetzerLiga.Core.Entity;
 using Xunit;
 
-namespace ServiceTest
+namespace ServiceTest.ApplicationService.Implementation.Logic
 {
     public class RoundValidatorTest
     {
         [Theory]
         [InlineData(-1)]
         [InlineData(-10)]
-        private void TestExceptionThrownWhenRoundNumberIsLessThanOne(int roundNumber)
+        public void TestExceptionThrownWhenRoundNumberIsLessThanOne(int roundNumber)
         { 
             RoundValidator rv = new RoundValidator();
             var round = new Round

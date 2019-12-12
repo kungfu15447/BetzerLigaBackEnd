@@ -12,6 +12,5 @@ namespace BetzerLiga.Core.ApplicationService
         Tournament CreateTournament(Tournament Tour);
         Tournament DeleteTournament(Tournament Tour);
         Tournament UpdateTournament(Tournament Tour);
-        Tournament GetCurrentOnGoingTournament();
     }
 }
