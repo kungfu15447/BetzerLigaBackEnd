@@ -18,7 +18,19 @@ namespace BetzerLiga.Infrastructure.SQL.Repositories
         }
         public Round Create(Round round)
         {
-            _ctx.Attach(round).State = EntityState.Added;
+            round = _ctx.Rounds.Add(round).Entity;
+            var listOfParticipants = _ctx.Participants.Where(ut => ut.TournamentId == round.TournamentId)
+                .ToList();
+            foreach (UserTour participant in listOfParticipants)
+            {
+                UserRound ur = new UserRound
+                {
+                    UserId = participant.UserId,
+                    RoundId = round.Id,
+                    UserPoints = 0
+                };
+                _ctx.Entry(ur).State = EntityState.Added;
+            }
             _ctx.SaveChanges();
             return round;
         }

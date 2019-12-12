@@ -180,14 +180,23 @@ namespace BetzerLiga.Infrastructure.SQL.Repositories
             {
                 _context.Entry(ut).State = EntityState.Added;
             }
-            /*var userFollower = new List<Follower>(UserToUpdate.Following ?? new List<Follower>());
-            _context.Following.RemoveRange(
-                _context.Following.Where(f => f.AuthorizedUserId == UserToUpdate.Id)
-                );
-            foreach (var uf in userFollower)
+
+            foreach (Round round in Tour.Rounds)
             {
-                _context.Entry(uf).State = EntityState.Added;
-            }*/
+                _context.RoundPoints.RemoveRange(
+                    _context.RoundPoints.Where(rp => rp.RoundId == round.Id));
+                foreach (UserTour participant in userTours)
+                {
+                    UserRound ur = new UserRound
+                    {
+                        UserId = participant.UserId,
+                        RoundId = round.Id,
+                        UserPoints = 0
+                    };
+                    _context.Entry(ur).State = EntityState.Added;
+                }
+            }
+
             _context.SaveChanges();
             return Tour;
         }
