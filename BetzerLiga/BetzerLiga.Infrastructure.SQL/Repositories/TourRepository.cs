@@ -86,6 +86,8 @@ namespace BetzerLiga.Infrastructure.SQL.Repositories
                                     Id = um.Id,
                                     UserId = um.UserId,
                                     MatchId = um.MatchId,
+                                    GuestTip = um.GuestTip,
+                                    HomeTip = um.HomeTip,
                                     Rating = um.Rating,
                                     TotalPoints = um.TotalPoints
                                 }).ToList()
