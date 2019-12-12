@@ -19,10 +19,25 @@ namespace BetzerLiga.RestAPI.Controllers
         {
             _umService = umService;
         }
+
+        [HttpGet]
+        public ActionResult<List<UserMatch>> Get([FromQuery]int userId, int roundId)
+        {
+            if (userId > 0 && roundId > 0)
+            {
+                return _umService.GetAllUserMatchesForUserAndRound(userId, roundId);
+            }
+            else
+            {
+                return BadRequest("userId or roundId isn't right'");
+            }
+
+        }
         [HttpPost]
         public void Post([FromBody] List<UserMatch> userMatches)
         {
             _umService.Create(userMatches);
         }
+
     }
 }

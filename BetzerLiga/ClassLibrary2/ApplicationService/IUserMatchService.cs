@@ -9,5 +9,6 @@ namespace BetzerLiga.Core.ApplicationService
     public interface IUserMatchService
     {
         void Create(List<UserMatch> userMatches);
+        List<UserMatch> GetAllUserMatchesForUserAndRound(int userId, int roundId);
     }
 }
