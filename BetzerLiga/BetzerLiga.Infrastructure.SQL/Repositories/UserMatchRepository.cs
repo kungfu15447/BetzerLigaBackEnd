@@ -27,6 +27,7 @@ namespace BetzerLiga.Infrastructure.SQL.Repositories
 
         public List<UserMatch> getAllUserMatchesForUserAndRound(int userId, int roundId)
         {
+            throw new NotImplementedException();
         }
     }
 }

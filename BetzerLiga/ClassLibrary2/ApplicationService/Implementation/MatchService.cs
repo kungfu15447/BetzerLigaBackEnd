@@ -45,7 +45,7 @@ namespace BetzerLiga.Core.ApplicationService.Implementation
                 return _matchRepo.DeleteMatch(match);
             }catch(Exception ex)
             {
-                throw ex
+                throw ex;
             }
             
         }
