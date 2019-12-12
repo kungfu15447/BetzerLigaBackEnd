@@ -39,7 +39,7 @@ namespace ServiceTest.ApplicationService.Implementation.Logic
                 Matches = new List<Match>()
             };
             PointCalculator pointCalc = new PointCalculator();
-            int roundTier = pointCalc.CalculateRoundTier(round);
+            int roundTier = pointCalc.CalculateRoundTier(round, tour);
 
             Assert.True(roundTier == result);
         }
@@ -270,7 +270,7 @@ namespace ServiceTest.ApplicationService.Implementation.Logic
                 Tournament = tour,
                 TournamentId = tour.Id
             };
-            pointCalc.SetRoundTier(pointCalc.CalculateRoundTier(round));
+            pointCalc.SetRoundTier(pointCalc.CalculateRoundTier(round, tour));
             int actualResult = pointCalc.CalculateBonusTierPoints(pointsTesting);
             Assert.Equal(expectedResult, actualResult);
         }

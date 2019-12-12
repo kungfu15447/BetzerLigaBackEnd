@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using BetzerLiga.Core.ApplicationService.Implementation.Logic;
 using BetzerLiga.Core.DomainService;
 using BetzerLiga.Core.Entity;
 
@@ -11,20 +12,42 @@ namespace BetzerLiga.Core.ApplicationService.Implementation
     {
         private IMatchRepository _matchRepo;
         private RoundService _roundService;
+        private MatchValidator _matchVali;
 
         public MatchService(IMatchRepository matchRepo, RoundService roundService)
         {
             _matchRepo = matchRepo;
             _roundService = roundService;
+            _matchVali = new MatchValidator();
         }
-        public IEnumerable<Match> CreateMatch(List<Match> matches)
+        public List<Match> CreateMatches(List<Match> matches)
         {
-            return _matchRepo.CreateMatch(matches);
+            try
+            {
+                foreach (Match match in matches)
+                {
+                    _matchVali.CheckIfMatchIsNull(match);
+                    _matchVali.ValidateMatch(match);
+                    _matchVali.ValidateMatchStartDate(match);
+                }
+                return _matchRepo.CreateMatch(matches).ToList();
+            }catch(Exception ex)
+            {
+                throw ex;
+            }    
         }
 
         public Match DeleteMatch(Match match)
         {
-            return _matchRepo.DeleteMatch(match);
+            try
+            {
+                _matchVali.CheckIfMatchIsNull(match);
+                return _matchRepo.DeleteMatch(match);
+            }catch(Exception ex)
+            {
+                throw ex
+            }
+            
         }
 
         public List<Match> GetAllMatches()
@@ -47,7 +70,15 @@ namespace BetzerLiga.Core.ApplicationService.Implementation
 
         public Match UpdateMatch(Match match)
         {
-            return _matchRepo.UpdateMatch(match);
+            try
+            {
+                _matchVali.CheckIfMatchIsNull(match);
+                return _matchRepo.UpdateMatch(match);
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
         }
 
         

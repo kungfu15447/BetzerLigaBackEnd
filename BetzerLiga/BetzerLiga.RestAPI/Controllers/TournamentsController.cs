@@ -29,13 +29,9 @@ namespace BetzerLiga.RestAPI.Controllers
         [HttpGet("{id}")]
         public ActionResult<Tournament> Get(int id)
         {
-            try
-            {
+           
                 return Ok(_tourService.GetTourById(id));
-            }catch(Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            
         }
 
         // POST api/pet
