@@ -40,9 +40,10 @@ namespace BetzerLiga.RestAPI.Controllers
         }
 
         [HttpPut]
-        public void Put([FromBody] List<UserMatch> tipsToUpdate)
+        public ActionResult<List<UserMatch>> Put([FromBody] List<UserMatch> tipsToUpdate)
         {
             _umService.UpdateUserMatches(tipsToUpdate);
+            return tipsToUpdate;
         }
     }
 }

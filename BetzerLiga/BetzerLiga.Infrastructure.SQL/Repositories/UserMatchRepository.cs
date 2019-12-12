@@ -64,7 +64,7 @@ namespace BetzerLiga.Infrastructure.SQL.Repositories
         {
             foreach (var um in tipToUpdate)
             {
-                _ctx.Entry(um).State = EntityState.Modified;
+                _ctx.Attach(um).State = EntityState.Modified;
             }
             _ctx.SaveChanges();
         }
