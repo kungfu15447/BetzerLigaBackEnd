@@ -8,6 +8,6 @@ namespace BetzerLiga.Core.ApplicationService
 {
     public interface IUserMatchService
     {
-        void Create(UserMatch userMatch);
+        void Create(List<UserMatch> userMatches);
     }
 }

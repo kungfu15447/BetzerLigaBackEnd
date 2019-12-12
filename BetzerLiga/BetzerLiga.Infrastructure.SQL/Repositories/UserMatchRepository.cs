@@ -16,10 +16,17 @@ namespace BetzerLiga.Infrastructure.SQL.Repositories
         {
             _ctx = ctx;
         }
-        public void Create(UserMatch userMatch)
+        public void Create(List<UserMatch> userMatches)
         {
-            _ctx.UserMatches.Attach(userMatch).State = EntityState.Added;
+            foreach (var userMatch in userMatches)
+            {
+                _ctx.UserMatches.Attach(userMatch).State = EntityState.Added;
+            }
             _ctx.SaveChanges();
+        }
+
+        public List<UserMatch> getAllUserMatchesForUserAndRound(int userId, int roundId)
+        {
         }
     }
 }

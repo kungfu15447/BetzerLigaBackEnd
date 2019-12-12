@@ -14,9 +14,9 @@ namespace BetzerLiga.Core.ApplicationService.Implementation
         {
             _umRepo = umRepo;
         }
-        public void Create(UserMatch userMatch)
+        public void Create(List<UserMatch> userMatches)
         {
-            throw new NotImplementedException();
+            _umRepo.Create(userMatches);
         }
     }
 }

@@ -58,11 +58,15 @@ namespace BetzerLiga.RestAPI
 
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IUserService, UserService>();
+
             services.AddScoped<IMatchRepository, MatchRepository>();
             services.AddScoped<IMatchService, MatchService>();
 
             services.AddScoped<ITourRepository, TourRepository>();
             services.AddScoped<ITourService, TourService>();
+
+            services.AddScoped<IUserMatchRepository, UserMatchRepository>();
+            services.AddScoped<IUserMatchService, UserMatchService>();
 
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IUserService, UserService>();

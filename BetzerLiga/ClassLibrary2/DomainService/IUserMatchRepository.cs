@@ -8,6 +8,7 @@ namespace BetzerLiga.Core.DomainService
 {
     public interface IUserMatchRepository
     {
-        void Create(UserMatch userMatch);
+        void Create(List<UserMatch> userMatches);
+        List<UserMatch> getAllUserMatchesForUserAndRound(int userId, int roundId);
     }
 }
