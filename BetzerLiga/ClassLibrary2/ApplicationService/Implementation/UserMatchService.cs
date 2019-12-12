@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using BetzerLiga.Core.DomainService;
@@ -23,6 +24,11 @@ namespace BetzerLiga.Core.ApplicationService.Implementation
         public List<UserMatch> GetAllUserMatchesForUserAndRound(int userId, int roundId)
         {
             return _umRepo.GetAllUserMatchesForUserAndRound(userId, roundId).ToList();
+        }
+
+        public void UpdateUserMatches(List<UserMatch> tipsUpdated)
+        {
+            _umRepo.UpdateUserMatches(tipsUpdated);
         }
     }
 }

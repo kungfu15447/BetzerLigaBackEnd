@@ -10,5 +10,6 @@ namespace BetzerLiga.Core.ApplicationService
     {
         void Create(List<UserMatch> userMatches);
         List<UserMatch> GetAllUserMatchesForUserAndRound(int userId, int roundId);
+        void UpdateUserMatches(List<UserMatch> tipsUpdated);
     }
 }

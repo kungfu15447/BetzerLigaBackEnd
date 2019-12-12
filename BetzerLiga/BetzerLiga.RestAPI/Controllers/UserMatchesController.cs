@@ -39,5 +39,10 @@ namespace BetzerLiga.RestAPI.Controllers
             _umService.Create(userMatches);
         }
 
+        [HttpPut]
+        public void Put([FromBody] List<UserMatch> tipsToUpdate)
+        {
+            _umService.UpdateUserMatches(tipsToUpdate);
+        }
     }
 }

@@ -59,5 +59,14 @@ namespace BetzerLiga.Infrastructure.SQL.Repositories
                 //    Tips = m.Tips.Where(t => t.UserId == userId).ToList()
                 //});
         }
+
+        public void UpdateUserMatches(List<UserMatch> tipToUpdate)
+        {
+            foreach (var um in tipToUpdate)
+            {
+                _ctx.Entry(um).State = EntityState.Modified;
+            }
+            _ctx.SaveChanges();
+        }
     }
 }

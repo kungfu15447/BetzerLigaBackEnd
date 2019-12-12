@@ -9,6 +9,7 @@ namespace BetzerLiga.Core.DomainService
     public interface IUserMatchRepository
     {
         void Create(List<UserMatch> userMatches);
-        IEnumerable<UserMatch> GetAllUserMatchesForUserAndRound(int userId, int roundId);
+        IEnumerable<UserMatch> GetAllUserMatchesForUserAndRound(int userId, int roundId); 
+        void UpdateUserMatches(List<UserMatch> tipToUpdate);
     }
 }
