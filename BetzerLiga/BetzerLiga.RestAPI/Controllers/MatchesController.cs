@@ -42,7 +42,14 @@ namespace BetzerLiga.RestAPI.Controllers
         [HttpPost]
         public ActionResult<IEnumerable<Match>> Post([FromBody] List<Match> matches)
         {
-            return Ok(_matchService.CreateMatch(matches));
+            try
+            {
+                return Ok(_matchService.CreateMatches(matches));
+            }catch(Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            
         }
 
         // PUT api/pet/5
@@ -51,7 +58,13 @@ namespace BetzerLiga.RestAPI.Controllers
         {
             if (id == match.Id)
             {
-                return Ok(_matchService.UpdateMatch(match));
+                try
+                {
+                    return Ok(_matchService.UpdateMatch(match));
+                }catch(Exception ex)
+                {
+                    return BadRequest(ex.Message);
+                }    
             }
             else
             {
@@ -64,13 +77,14 @@ namespace BetzerLiga.RestAPI.Controllers
         [HttpDelete("{id}")]
         public ActionResult<Tournament> Delete(int id)
         {
-            Match match = _matchService.GetMatchById(id);
-            if (match != null)
+            try
             {
+                Match match = _matchService.GetMatchById(id);
                 return Ok(_matchService.DeleteMatch(match));
-            }else
+            }
+            catch(Exception ex)
             {
-                return NotFound("Could not find match to delete");
+                return BadRequest(ex.Message);
             }
             
         }

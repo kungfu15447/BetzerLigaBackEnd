@@ -17,11 +17,11 @@ namespace BetzerLiga.Core.ApplicationService.Implementation.Logic
         private int _defaultPointsForTotalGoals = 30;
         private int _defaultPointsForTotalMatchesCorrect = 3;
         private int _defaultPointsForWinner = 27;
-        public int CalculateRoundTier(Round round)
+        public int CalculateRoundTier(Round round, Tournament tournament)
         {
             int currentRoundTier;
             double amountOfTiers = 3.0;
-            double tierDividerDecimal = round.Tournament.NumberOfRounds / amountOfTiers;
+            double tierDividerDecimal = tournament.NumberOfRounds / amountOfTiers;
             int tierDivider = Convert.ToInt32(Math.Ceiling(tierDividerDecimal));
 
             if (round.RoundNumber > tierDivider && round.RoundNumber <= tierDivider * 2)
@@ -42,7 +42,7 @@ namespace BetzerLiga.Core.ApplicationService.Implementation.Logic
 
             foreach (Round round in tournament.Rounds)
             {
-                _defaultRoundTier = CalculateRoundTier(round);
+                _defaultRoundTier = CalculateRoundTier(round, tournament);
                 round.TotalGoals = CalculateTotalGoalsThisRound(round);
                 foreach (UserTour user in tournament.Participants)
                 {
