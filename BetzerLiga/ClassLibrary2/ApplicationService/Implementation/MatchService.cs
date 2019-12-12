@@ -11,10 +11,11 @@ namespace BetzerLiga.Core.ApplicationService.Implementation
     public class MatchService : IMatchService
     {
         private IMatchRepository _matchRepo;
-        private RoundService _roundService;
+        private IRoundService _roundService;
         private MatchValidator _matchVali;
 
-        public MatchService(IMatchRepository matchRepo, RoundService roundService)
+
+        public MatchService(IMatchRepository matchRepo, IRoundService roundService)
         {
             _matchRepo = matchRepo;
             _roundService = roundService;
@@ -58,6 +59,11 @@ namespace BetzerLiga.Core.ApplicationService.Implementation
         public Match GetMatchById(int id)
         {
             return _matchRepo.ReadMatchById(id);
+        }
+
+        public List<Match> ReadMatchesFromRound(int userId, int roundId)
+        {
+            return _matchRepo.ReadMatchesFromRound(userId, roundId).ToList();
         }
 
         public List<Match> GetMatchesByCurrentRoundAndByUserId(User user)
