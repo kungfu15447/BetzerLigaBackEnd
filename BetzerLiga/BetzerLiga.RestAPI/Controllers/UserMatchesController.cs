@@ -34,9 +34,10 @@ namespace BetzerLiga.RestAPI.Controllers
 
         }
         [HttpPost]
-        public void Post([FromBody] List<UserMatch> userMatches)
+        public ActionResult<List<UserMatch>> Post([FromBody] List<UserMatch> userMatches)
         {
             _umService.Create(userMatches);
+            return userMatches;
         }
 
         [HttpPut]
