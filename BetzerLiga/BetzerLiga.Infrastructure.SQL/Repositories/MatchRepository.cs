@@ -43,8 +43,8 @@ namespace BetzerLiga.Infrastructure.SQL.Repositories
 
         public IEnumerable<Match> ReadMatchesFromRound(int userId, int roundId)
         {
-            var round = _context.Rounds.FirstOrDefault(r => r.Id == roundId);
             var tipsFound = _context.Matches
+                .Where(m => m.Tips.Exists(um => um.UserId == userId && um.Match.Round.Id == roundId))
                 .Include(m => m.Tips)
                 .Select(m => new Match
                 {
@@ -56,7 +56,7 @@ namespace BetzerLiga.Infrastructure.SQL.Repositories
                     HomeTeam = m.HomeTeam,
                     RoundId = m.RoundId,
                     StartDate = m.StartDate,
-                    Tips = m.Tips
+                    Tips = m.Tips.Where(um => um.UserId == userId).ToList()
                 });
             return tipsFound;
         }

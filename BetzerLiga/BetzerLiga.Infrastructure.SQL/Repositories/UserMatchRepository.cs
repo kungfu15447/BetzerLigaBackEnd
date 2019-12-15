@@ -30,7 +30,7 @@ namespace BetzerLiga.Infrastructure.SQL.Repositories
             Round round = _ctx.Rounds.FirstOrDefault(r => r.Id == roundId);
             List<UserMatch> tips = new List<UserMatch>();
             tips = _ctx.UserMatches
-                .Where(um => um.UserId == userId)
+                .Where(um => um.UserId == userId && um.Match.RoundId == roundId)
                 .Include(um => um.Match)
                 .Select(um => new UserMatch
                 {

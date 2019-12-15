@@ -164,7 +164,7 @@ namespace BetzerLiga.RestAPI.Initializer
             };
             UserRound userRound4 = new UserRound
             {
-                User = user1,
+                User = user4,
                 Round = round2,
                 UserPoints = 0
             };
@@ -177,6 +177,12 @@ namespace BetzerLiga.RestAPI.Initializer
             UserRound userRound6 = new UserRound
             {
                 User = user3,
+                Round = round2,
+                UserPoints = 0
+            };
+            UserRound userRound7 = new UserRound
+            {
+                User = user1,
                 Round = round2,
                 UserPoints = 0
             };
@@ -367,6 +373,7 @@ namespace BetzerLiga.RestAPI.Initializer
             tour2.Participants.Add(usertour1);
             tour2.Participants.Add(usertour2);
             tour2.Participants.Add(usertour3);
+            tour2.Participants.Add(usertour4);
 
 
             round1.RoundPoints.Add(userRound1);
@@ -375,6 +382,8 @@ namespace BetzerLiga.RestAPI.Initializer
             round2.RoundPoints.Add(userRound4);
             round2.RoundPoints.Add(userRound5);
             round2.RoundPoints.Add(userRound6);
+            round2.RoundPoints.Add(userRound7);
+
             match1.Tips.Add(tips1);
             match1.Tips.Add(tips4);
             match1.Tips.Add(tips7);
