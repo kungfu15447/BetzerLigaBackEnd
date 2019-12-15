@@ -27,7 +27,6 @@ namespace BetzerLiga.Infrastructure.SQL.Repositories
 
         public IEnumerable<UserMatch> GetAllUserMatchesForUserAndRound(int userId, int roundId)
         {
-            Round round = _ctx.Rounds.FirstOrDefault(r => r.Id == roundId);
             List<UserMatch> tips = new List<UserMatch>();
             tips = _ctx.UserMatches
                 .Where(um => um.UserId == userId && um.Match.RoundId == roundId)
