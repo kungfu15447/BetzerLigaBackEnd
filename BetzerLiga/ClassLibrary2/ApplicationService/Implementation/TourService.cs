@@ -35,7 +35,15 @@ namespace BetzerLiga.Core.ApplicationService.Implementation
 
         public Tournament DeleteTournament(Tournament Tour)
         {
-            return _tourRepo.DeleteTour(Tour);
+            try
+            {
+                _tourVali.CheckIfTournamentIsNull(Tour);
+                return _tourRepo.DeleteTour(Tour);
+            }catch(Exception ex)
+            {
+                throw ex;
+            }
+            
         }
 
         public List<Tournament> GetAllTour()
@@ -45,7 +53,8 @@ namespace BetzerLiga.Core.ApplicationService.Implementation
 
         public Tournament GetTourById(int id)
         {
-            
+            try
+            {
                 Tournament tournament = _tourRepo.ReadTourById(id);
                 _tourVali.CheckIfTournamentIsNull(tournament);
                 if (!tournament.IsDone || DateTime.Compare(tournament.StartDate, DateTime.Now) <= 0)
@@ -54,8 +63,11 @@ namespace BetzerLiga.Core.ApplicationService.Implementation
                     tournament.Participants.OrderByDescending(ut => ut.TotalUserPoints);
                 }
                 return tournament;
-            
-            
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public Tournament UpdateTournament(Tournament Tour)

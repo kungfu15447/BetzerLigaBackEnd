@@ -29,9 +29,13 @@ namespace BetzerLiga.RestAPI.Controllers
         [HttpGet("{id}")]
         public ActionResult<Tournament> Get(int id)
         {
-           
+            try
+            {
                 return Ok(_tourService.GetTourById(id));
-            
+            }catch(Exception ex)
+            {
+                return NotFound(ex.Message);
+            }
         }
 
         // POST api/pet
@@ -72,15 +76,15 @@ namespace BetzerLiga.RestAPI.Controllers
         [HttpDelete("{id}")]
         public ActionResult<Tournament> Delete(int id)
         {
-            Tournament tournament = _tourService.GetTourById(id);
-            if (tournament != null)
+            try
             {
+                Tournament tournament = _tourService.GetTourById(id);
                 return Ok(_tourService.DeleteTournament(tournament));
-            }else
-            {
-                return NotFound("Could not find tournament to delete");
             }
-            
+            catch(Exception ex)
+            {
+                return NotFound(ex.Message);
+            }         
         }
     }
 }
