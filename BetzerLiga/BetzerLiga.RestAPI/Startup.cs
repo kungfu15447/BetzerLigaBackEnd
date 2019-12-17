@@ -52,7 +52,7 @@ namespace BetzerLiga.RestAPI
                     ValidateIssuerSigningKey = true,
                     IssuerSigningKey = new SymmetricSecurityKey(secretBytes),
                     ValidateLifetime = true, //validate the expiration and not before values in the token
-                    ClockSkew = TimeSpan.FromMinutes(10) //5 minute tolerance for the expiration date
+                    ClockSkew = TimeSpan.FromMinutes(5) //2 minute tolerance for the expiration date
                 };
             });
 
@@ -71,18 +71,10 @@ namespace BetzerLiga.RestAPI
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IUserService, UserService>();
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-            services.AddMvc().AddJsonOptions(options =>
-            {
-                options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
-                options.SerializerSettings.MaxDepth = 10;
-            });
-
             //CORS
             services.AddCors(options =>
             {
-                options.AddPolicy("AllowSpecificOrigin",
+                options.AddPolicy("AllowAnyOrigin",
                     builder => builder
                         .AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
             });
@@ -106,20 +98,20 @@ namespace BetzerLiga.RestAPI
                 opt.UseSqlServer(Configuration.GetConnectionString
                 ("defaultConnection")));
             }
-            services.AddCors(options =>
+
+            //services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            //services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddMvc().AddJsonOptions(options =>
             {
-                options.AddPolicy("AllowSpecificOrigin",
-                    builder => builder
-                        .AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod()
-                    );
+                options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+                options.SerializerSettings.MaxDepth = 10;
             });
-            services.AddCors(options => options.AddPolicy("AllowSpecificOrigin", builder => builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod()));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            app.UseCors("AllowSpecificOrigin");
+            app.UseCors("AllowAnyOrigin");
 
             if (env.IsDevelopment())
             {
@@ -140,9 +132,19 @@ namespace BetzerLiga.RestAPI
             {
                 using (var scope = app.ApplicationServices.CreateScope())
                 {
+
+                    /*var services = scope.ServiceProvider;
+                    var dbContext = services.GetService<BetzerLigaContext>();
+                    var dbInitializer = services.GetService<IDBInitializer>();
+                    dbContext.Database.EnsureCreated();
+                    //dbInitializer.Seed(dbContext);*/
                     var context = scope.ServiceProvider
                         .GetRequiredService<BetzerLigaContext>();
                     context.Database.EnsureCreated();
+                    /*var dbInitializer = scope.ServiceProvider
+                        .GetRequiredService<IDBInitializer>();
+                    dbInitializer.Seed(context);*/
+
                 }
                 app.UseHsts();
             }
