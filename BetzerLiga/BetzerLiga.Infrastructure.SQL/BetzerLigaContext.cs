@@ -51,12 +51,14 @@ namespace BetzerLiga.Infrastructure.SQL
             ModelBuilder.Entity<Follower>()
                 .HasOne(pt => pt.Follow)
                 .WithMany()
-                .HasForeignKey(pt => pt.FollowId);
+                .HasForeignKey(pt => pt.FollowId)
+                .OnDelete(DeleteBehavior.Cascade);
 
             ModelBuilder.Entity<Follower>()
                 .HasOne(pt => pt.AuthorizedUser)
                 .WithMany(t => t.Following)
-                .HasForeignKey(pt => pt.AuthorizedUserId);
+                .HasForeignKey(pt => pt.AuthorizedUserId)
+                .OnDelete(DeleteBehavior.Cascade);
             /*
             ModelBuilder.Entity<Follower>()
                 .HasKey(f => new {f.FollowId, f.AuthorizedUserId});

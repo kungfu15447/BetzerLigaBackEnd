@@ -25,7 +25,7 @@ namespace BetzerLiga.RestAPI.Controllers
         [HttpPost]
         public IActionResult Login([FromBody]LoginInputModel model)
         {
-            var user = userRepository.GetAll().FirstOrDefault(u => u.Email == model.Username);
+            var user = userRepository.GetUserByEmail(model.Username);
 
             if(user == null)
             {
@@ -35,6 +35,7 @@ namespace BetzerLiga.RestAPI.Controllers
             {
                 return Unauthorized();
             }
+            user.PasswordSalt = user.PasswordHash = null;
             return Ok(new
             {
                 User = user,
