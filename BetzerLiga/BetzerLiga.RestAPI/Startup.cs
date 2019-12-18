@@ -86,18 +86,22 @@ namespace BetzerLiga.RestAPI
             services.AddSingleton<IAuthenticationHelper>(new AuthenticationHelper(secretBytes));
 
             // Register database initializer
-            if (Environment.IsDevelopment())
-            {
-                services.AddDbContext<BetzerLigaContext>(
-                optionsAction: opt => opt.UseSqlite(
-                    connectionString: "Data Source = BetzerLiga.db"));
-            }
-            else
-            {
-                services.AddDbContext<BetzerLigaContext>(opt =>
-                opt.UseSqlServer(Configuration.GetConnectionString
-                ("defaultConnection")));
-            }
+             if (Environment.IsDevelopment())
+             {
+                 services.AddDbContext<BetzerLigaContext>(
+                 optionsAction: opt => opt.UseSqlite(
+                     connectionString: "Data Source = BetzerLiga.db"));
+             }
+             else
+             {
+                 services.AddDbContext<BetzerLigaContext>(opt =>
+                 opt.UseSqlServer(Configuration.GetConnectionString
+                 ("defaultConnection")));
+             }
+
+
+            /*services.AddDbContext<BetzerLigaContext>(opt =>
+               opt.UseSqlServer("Data Source=tcp:betzerliga-new.database.windows.net,1433; Initial Catalog=BetzerLiga-new-db; User Id=betzerliga@betzerliga-new.database.windows.net; Password=PW;"));*/
 
             //services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             //services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
@@ -141,6 +145,9 @@ namespace BetzerLiga.RestAPI
                     var context = scope.ServiceProvider
                         .GetRequiredService<BetzerLigaContext>();
                     context.Database.EnsureCreated();
+                    //var services = scope.ServiceProvider;
+                    //var dbInitializer = services.GetService<IDBInitializer>();
+                    //dbInitializer.Seed(context);
                     /*var dbInitializer = scope.ServiceProvider
                         .GetRequiredService<IDBInitializer>();
                     dbInitializer.Seed(context);*/
