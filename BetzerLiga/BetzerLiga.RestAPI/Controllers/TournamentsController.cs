@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using BetzerLiga.Core.ApplicationService;
 using BetzerLiga.Core.Entity;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -19,13 +20,13 @@ namespace BetzerLiga.RestAPI.Controllers
         {
             _tourService = tourService;
         }
-
+        [Authorize]
         [HttpGet]
         public ActionResult<List<Tournament>> Get()
         {
             return Ok(_tourService.GetAllTour());
         }
-
+        [Authorize]
         [HttpGet("{id}")]
         public ActionResult<Tournament> Get(int id)
         {
@@ -39,6 +40,7 @@ namespace BetzerLiga.RestAPI.Controllers
         }
 
         // POST api/pet
+        [Authorize(Roles = "Administrator")]
         [HttpPost]
         public ActionResult<Tournament> Post([FromBody] Tournament tournament)
         {
@@ -52,6 +54,7 @@ namespace BetzerLiga.RestAPI.Controllers
         }
 
         // PUT api/pet/5
+        [Authorize(Roles = "Administrator")]
         [HttpPut("{id}")]
         public ActionResult<Tournament> Put(int id, [FromBody] Tournament tournament)
         {
@@ -73,6 +76,7 @@ namespace BetzerLiga.RestAPI.Controllers
         }
 
         // DELETE api/pet/5
+        [Authorize(Roles = "Administrator")]
         [HttpDelete("{id}")]
         public ActionResult<Tournament> Delete(int id)
         {

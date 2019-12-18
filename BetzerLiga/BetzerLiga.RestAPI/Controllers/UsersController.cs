@@ -20,7 +20,7 @@ namespace BetzerLiga.RestAPI.Controllers
         }
 
         // GET api/users
-        //[Authorize]
+        [Authorize]
         [HttpGet]
         public ActionResult<IEnumerable<User>> Get()
         {
@@ -36,7 +36,7 @@ namespace BetzerLiga.RestAPI.Controllers
         }
 
         // GET api/users/5
-        //[Authorize(Roles = "Administrator")]
+        [Authorize(Roles = "Administrator")]
         [HttpGet("{id}")]
         public ActionResult<User> Get(int id)
         {
@@ -52,7 +52,7 @@ namespace BetzerLiga.RestAPI.Controllers
         }
 
         // POST api/users
-
+        [Authorize(Roles = "Administrator")]
         [HttpPost]
         public ActionResult<User> Post([FromBody] User user)
         {
@@ -67,6 +67,7 @@ namespace BetzerLiga.RestAPI.Controllers
         }
 
         // PUT api/users/5
+        [Authorize(Roles = "Administrator")]
         [HttpPut("{id}")]
         public ActionResult<User> Put(int id, [FromBody] User user)
         {
@@ -86,6 +87,7 @@ namespace BetzerLiga.RestAPI.Controllers
 
         // DELETE api/users/5
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Administrator")]
         public ActionResult<User> Delete(int id)
         {
             var user = _userServ.Delete(id);
