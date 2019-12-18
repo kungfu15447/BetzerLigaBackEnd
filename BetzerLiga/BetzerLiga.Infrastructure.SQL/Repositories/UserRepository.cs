@@ -30,6 +30,7 @@ namespace BetzerLiga.Infrastructure.SQL.Repositories
 
         public User Delete(int id)
         {
+            _context.Following.RemoveRange(_context.Following.Where(f => f.AuthorizedUserId == id));
             var userRemoved = _context.Remove(new User { Id = id }).Entity;
             _context.SaveChanges();
             return userRemoved;
@@ -39,14 +40,38 @@ namespace BetzerLiga.Infrastructure.SQL.Repositories
         {
             return _context.Users.Include(u => u.Following)
                 .AsNoTracking()
-                .OrderBy(u => u.Id);
+                .OrderBy(u => u.Id)
+                .Select(u => new User { 
+                    Id = u.Id,
+                    IsAdmin = u.IsAdmin,
+                    Firstname = u.Firstname,
+                    Email = u.Email,
+                    Following = u.Following,
+                    Lastname = u.Lastname
+                });
         }
 
         public User GetUserById(int id)
         {
             return _context.Users.Include(u => u.Following)
                 .AsNoTracking()
+                .Select(u => new User
+                {
+                    Id = u.Id,
+                    IsAdmin = u.IsAdmin,
+                    Firstname = u.Firstname,
+                    Email = u.Email,
+                    Following = u.Following,
+                    Lastname = u.Lastname
+                })
                 .FirstOrDefault(u => u.Id == id);
+        }
+
+        public User GetUserByEmail(string email)
+        {
+            return _context.Users.Include(u => u.Following)
+                .AsNoTracking()
+                .FirstOrDefault(u => u.Email == email);
         }
 
         public User Update(User UserToUpdate)
@@ -75,6 +100,7 @@ namespace BetzerLiga.Infrastructure.SQL.Repositories
                 _context.Entry(uf).State = EntityState.Added;
             }
             _context.SaveChanges();
+            UserToUpdate.PasswordHash = UserToUpdate.PasswordSalt = null;
             return UserToUpdate;
         }
     }

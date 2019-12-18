@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 using BetzerLiga.Core.ApplicationService.Implementation.Logic;
 using BetzerLiga.Core.DomainService;
@@ -41,6 +42,11 @@ namespace BetzerLiga.Core.ApplicationService.Implementation
             return _userRep.GetAll();
         }
 
+        public User GetUserByEmail(string email)
+        {
+            return _userRep.GetUserByEmail(email);
+        }
+
         public User GetUserById(int id)
         {
             try
@@ -56,15 +62,21 @@ namespace BetzerLiga.Core.ApplicationService.Implementation
 
         public User Update(User UserToUpdate)
         {
-            try
+            _userVali.CheckIfUserIsNull(UserToUpdate);
+            if(UserToUpdate.Id <= 0)
             {
-                _userVali.CheckIfUserIsNull(UserToUpdate);
-                User checkedUser = _userVali.ValidateUser(UserToUpdate);
-                return _userRep.Update(checkedUser);
-            }catch(Exception ex)
-            {
-                throw ex;
+                throw new InvalidDataException("Do IT");
             }
+            var existingUser = _userRep.GetUserByEmail(UserToUpdate.Email);
+            if(existingUser == null)
+            {
+                throw new InvalidDataException("Not Found Fix it");
+
+            }
+            User checkedUser = _userVali.ValidateUser(UserToUpdate);
+            checkedUser.PasswordHash = existingUser.PasswordHash;
+            checkedUser.PasswordSalt = existingUser.PasswordSalt;
+            return _userRep.Update(checkedUser);
         }
     }
 }
