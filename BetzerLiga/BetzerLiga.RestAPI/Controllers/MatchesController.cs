@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using BetzerLiga.Core.ApplicationService;
 using BetzerLiga.Core.Entity;
 using BetzerLiga.Infrastructure.SQL;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -21,7 +22,7 @@ namespace BetzerLiga.RestAPI.Controllers
             _matchService = matchService;
             _context = context;
         }
-
+        [Authorize]
         [HttpGet]
         public ActionResult<List<Match>> Get([FromQuery]int userId, int roundId)
         {
@@ -31,14 +32,16 @@ namespace BetzerLiga.RestAPI.Controllers
             }
             return Ok(_matchService.GetAllMatches());
         }
-
+        [Authorize]
         [HttpGet("{id}")]
         public ActionResult<Match> Get(int id)
         {
             return Ok(_matchService.GetMatchById(id));
         }
 
+
         // POST api/pet
+        [Authorize(Roles = "Administrator")]
         [HttpPost]
         public ActionResult<IEnumerable<Match>> Post([FromBody] List<Match> matches)
         {
@@ -53,6 +56,7 @@ namespace BetzerLiga.RestAPI.Controllers
         }
 
         // PUT api/pet/5
+        [Authorize(Roles = "Administrator")]
         [HttpPut("{id}")]
         public ActionResult<Tournament> Put(int id, [FromBody] Match match)
         {
@@ -74,6 +78,7 @@ namespace BetzerLiga.RestAPI.Controllers
         }
 
         // DELETE api/pet/5
+        [Authorize(Roles = "Administrator")]
         [HttpDelete("{id}")]
         public ActionResult<Tournament> Delete(int id)
         {
