@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BetzerLiga.Core.ApplicationService;
 using BetzerLiga.Core.DomainService;
 using BetzerLiga.Core.Entity.Authentication;
 using Microsoft.AspNetCore.Http;
@@ -13,19 +14,19 @@ namespace BetzerLiga.RestAPI.Controllers
     [ApiController]
     public class TokenController : ControllerBase
     {
-        private IUserRepository userRepository;
+        private IUserService userService;
         private IAuthenticationHelper authenticationHelper;
 
-        public TokenController(IUserRepository repos, IAuthenticationHelper authService)
+        public TokenController(IAuthenticationHelper authService, IUserService uService)
         {
-            userRepository = repos;
+            userService = uService;
             authenticationHelper = authService;
         }
         
         [HttpPost]
         public IActionResult Login([FromBody]LoginInputModel model)
         {
-            var user = userRepository.GetUserByEmail(model.Username);
+            var user = userService.GetUserByEmail(model.Username);
 
             if(user == null)
             {

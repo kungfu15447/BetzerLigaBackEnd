@@ -42,6 +42,11 @@ namespace BetzerLiga.Core.ApplicationService.Implementation
             return _userRep.GetAll();
         }
 
+        public User GetUserByEmail(string email)
+        {
+            return _userRep.GetUserByEmail(email);
+        }
+
         public User GetUserById(int id)
         {
             try

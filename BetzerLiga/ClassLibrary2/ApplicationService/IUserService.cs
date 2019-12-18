@@ -10,6 +10,7 @@ namespace BetzerLiga.Core.ApplicationService
         IEnumerable<User> GetAll();
 
         User GetUserById(int id);
+        User GetUserByEmail(string email);
 
         User Add(User user);
 
