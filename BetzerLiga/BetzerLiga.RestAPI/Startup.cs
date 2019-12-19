@@ -99,12 +99,6 @@ namespace BetzerLiga.RestAPI
                  ("defaultConnection")));
              }
 
-
-            /*services.AddDbContext<BetzerLigaContext>(opt =>
-               opt.UseSqlServer("Data Source=tcp:betzerliga-new.database.windows.net,1433; Initial Catalog=BetzerLiga-new-db; User Id=betzerliga@betzerliga-new.database.windows.net; Password=PW;"));*/
-
-            //services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-            //services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             services.AddMvc().AddJsonOptions(options =>
             {
                 options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
@@ -121,14 +115,13 @@ namespace BetzerLiga.RestAPI
             {
                 using (var scope = app.ApplicationServices.CreateScope())
                 {
-                    var context = scope.ServiceProvider
+                    var services = scope.ServiceProvider;
+                    var context = services
                         .GetRequiredService<BetzerLigaContext>();
                     context.Database.EnsureDeleted();
                     context.Database.EnsureCreated();
-                    var services = scope.ServiceProvider;
-                    var dbContext = services.GetService<BetzerLigaContext>();
-                    var dbInitializer = services.GetService<IDBInitializer>();
-                    dbInitializer.Seed(dbContext);
+                    var dbInitializer = services.GetRequiredService<IDBInitializer>();
+                    dbInitializer.Seed(context);
                 }
                 app.UseDeveloperExceptionPage();
             }
@@ -136,21 +129,9 @@ namespace BetzerLiga.RestAPI
             {
                 using (var scope = app.ApplicationServices.CreateScope())
                 {
-
-                    /*var services = scope.ServiceProvider;
-                    var dbContext = services.GetService<BetzerLigaContext>();
-                    var dbInitializer = services.GetService<IDBInitializer>();
-                    dbContext.Database.EnsureCreated();
-                    //dbInitializer.Seed(dbContext);*/
                     var context = scope.ServiceProvider
                         .GetRequiredService<BetzerLigaContext>();
                     context.Database.EnsureCreated();
-                    //var services = scope.ServiceProvider;
-                    //var dbInitializer = services.GetService<IDBInitializer>();
-                    //dbInitializer.Seed(context);
-                    /*var dbInitializer = scope.ServiceProvider
-                        .GetRequiredService<IDBInitializer>();
-                    dbInitializer.Seed(context);*/
 
                 }
                 app.UseHsts();
