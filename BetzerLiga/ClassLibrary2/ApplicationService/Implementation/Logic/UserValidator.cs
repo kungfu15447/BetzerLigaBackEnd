@@ -24,6 +24,13 @@ namespace BetzerLiga.Core.ApplicationService.Implementation.Logic
             }
             return user;
         }
+        public void CheckIfIdIsValid(User user)
+        {
+            if (user.Id <= 0)
+            {
+                throw new InvalidDataException("Id not valid!");
+            }
+        }
 
         public void CheckIfUserIsNull(User user)
         {

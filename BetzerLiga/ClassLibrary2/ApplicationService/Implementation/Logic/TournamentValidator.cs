@@ -33,6 +33,14 @@ namespace BetzerLiga.Core.ApplicationService.Implementation.Logic
             }
         }
 
+        public void CheckIfIdIsValid(Tournament tour)
+        {
+            if (tour.Id <= 0)
+            {
+                throw new InvalidDataException("Id not valid!");
+            }
+        }
+
         public void ValidateDatesIsNotBeforeTodayOnCreatedTournament(Tournament tour)
         {
             if (DateTime.Compare(tour.EndDate, DateTime.Now) == -1

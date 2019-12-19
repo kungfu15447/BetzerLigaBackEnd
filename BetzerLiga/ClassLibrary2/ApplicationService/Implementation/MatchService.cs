@@ -78,7 +78,11 @@ namespace BetzerLiga.Core.ApplicationService.Implementation
         {
             try
             {
+                _matchVali.ValidateMatch(match);
                 _matchVali.CheckIfMatchIsNull(match);
+                _matchVali.CheckIfIdIsValid(match);
+                Match existingMatch = _matchRepo.ReadMatchById(match.Id);
+                _matchVali.CheckIfMatchIsNull(existingMatch);
                 return _matchRepo.UpdateMatch(match);
             }
             catch(Exception ex)

@@ -70,16 +70,20 @@ namespace BetzerLiga.Core.ApplicationService.Implementation
             }
         }
 
-        public Tournament UpdateTournament(Tournament Tour)
+        public Tournament UpdateTournament(Tournament tour)
         {
             try
             {
-                _tourVali.ValidateTournament(Tour);
-                if (DateTime.Compare(Tour.EndDate, DateTime.Now) == -1)
+                _tourVali.CheckIfTournamentIsNull(tour);
+                _tourVali.ValidateTournament(tour);
+                _tourVali.CheckIfIdIsValid(tour);
+                if (DateTime.Compare(tour.EndDate, DateTime.Now) == -1)
                 {
-                    Tour.IsDone = true;
+                    tour.IsDone = true;
                 }
-                return _tourRepo.UpdateTour(Tour);
+                Tournament existingTour = _tourRepo.ReadTourById(tour.Id);
+                _tourVali.CheckIfTournamentIsNull(existingTour);
+                return _tourRepo.UpdateTour(tour);
             }catch(Exception ex)
             {
                 throw ex;

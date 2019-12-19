@@ -60,20 +60,13 @@ namespace BetzerLiga.Core.ApplicationService.Implementation
             }
         }
 
-        public User Update(User UserToUpdate)
+        public User Update(User userToUpdate)
         {
-            _userVali.CheckIfUserIsNull(UserToUpdate);
-            if(UserToUpdate.Id <= 0)
-            {
-                throw new InvalidDataException("Do IT");
-            }
-            var existingUser = _userRep.GetUserByEmail(UserToUpdate.Email);
-            if(existingUser == null)
-            {
-                throw new InvalidDataException("Not Found Fix it");
-
-            }
-            User checkedUser = _userVali.ValidateUser(UserToUpdate);
+            _userVali.CheckIfUserIsNull(userToUpdate);
+            _userVali.CheckIfIdIsValid(userToUpdate);
+            User existingUser = _userRep.GetUserByEmail(userToUpdate.Email);
+            _userVali.CheckIfUserIsNull(existingUser);
+            User checkedUser = _userVali.ValidateUser(userToUpdate);
             checkedUser.PasswordHash = existingUser.PasswordHash;
             checkedUser.PasswordSalt = existingUser.PasswordSalt;
             return _userRep.Update(checkedUser);

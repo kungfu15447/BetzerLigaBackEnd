@@ -54,5 +54,13 @@ namespace BetzerLiga.Core.ApplicationService.Implementation.Logic
                 throw new InvalidDataException("Match must be something");
             }
         }
+
+        public void CheckIfIdIsValid(Match match)
+        {
+            if (match.Id <= 0)
+            {
+                throw new InvalidDataException("Id is not valid!");
+            }
+        }
     }
 }
