@@ -26,7 +26,7 @@ namespace BetzerLiga.RestAPI.Controllers
         [HttpGet]
         public ActionResult<List<Match>> Get([FromQuery]int userId, int roundId)
         {
-            if (userId > 0 & roundId > 0)
+            if (userId > 0 && roundId > 0)
             {
                 return _matchService.ReadMatchesFromRound(userId, roundId);
             }
